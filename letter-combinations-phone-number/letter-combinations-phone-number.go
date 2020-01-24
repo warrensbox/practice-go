@@ -28,7 +28,10 @@ func threeSum(digits string) []string {
 
 	for _, val := range digits {
 
-		fmt.Println(string(val))
+		num := string(val)
+
+		arrStr = append(arrStr, dict[num])
+
 	}
 
 	return arrStr
