@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 func main() {
@@ -14,6 +15,8 @@ func main() {
 func threeSum(digits string) []string {
 
 	var arrStr []string
+	var combineAll strings.Builder
+	//var combinePair strings.Builder
 
 	dict := make(map[string]string)
 
@@ -29,9 +32,24 @@ func threeSum(digits string) []string {
 	for _, val := range digits {
 
 		num := string(val)
+		combineAll.WriteString(dict[num])
 
-		arrStr = append(arrStr, dict[num])
+	}
 
+	allLetters := combineAll.String()
+	fmt.Println(string(allLetters))
+	track := make(map[string]string)
+
+	for i := 0; i < len(allLetters); i++ {
+		//fmt.Println(string(allLetters[i]))
+		for j := 0; j < len(allLetters)-1; j++ {
+			fmt.Println(string(allLetters[i]) + string(allLetters[j]))
+
+			_, ok := track[string(allLetters[j])+string(allLetters[i])]
+			if !ok {
+
+			}
+		}
 	}
 
 	return arrStr
