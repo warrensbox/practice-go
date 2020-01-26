@@ -13,7 +13,7 @@ func main() {
 	fmt.Println(output)
 }
 
-func searchInsert(nums []int, target int) int {
+func searchInsert1(nums []int, target int) int {
 
 	index, i := 0, 0
 	for i < len(nums) {
@@ -37,4 +37,43 @@ func searchInsert(nums []int, target int) int {
 	}
 
 	return index
+}
+
+// public int searchInsert(int[] A, int target) {
+// 	int low = 0, high = A.length-1;
+// 	while(low<=high){
+// 		int mid = (low+high)/2;
+// 		if(A[mid] == target) return mid;
+// 		else if(A[mid] > target) high = mid-1;
+// 		else low = mid+1;
+// 	}
+// 	return low;
+// }
+
+func searchInsert(nums []int, target int) int {
+
+	low := 0
+	high := len(nums) - 1
+
+	for low <= high {
+
+		fmt.Println("high", high)
+		fmt.Println("low", low)
+		fmt.Println("_______")
+		mid := (low + high) / 2
+		fmt.Println("mid", mid)
+		fmt.Println("nums[mid]", nums[mid])
+
+		if nums[mid] == target {
+			return mid
+		} else if nums[mid] > target {
+			high = mid - 1
+		} else {
+			low = mid + 1
+		}
+		fmt.Println("++++++++++")
+	}
+
+	fmt.Println("low", low)
+	return low
 }
