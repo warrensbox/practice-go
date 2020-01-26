@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
 func main() {
@@ -14,43 +13,39 @@ func main() {
 
 func threeSum(digits string) []string {
 
-	var arrStr []string
-	var combineAll strings.Builder
-	//var combinePair strings.Builder
-
-	dict := make(map[string]string)
-
-	dict["2"] = "abc"
-	dict["3"] = "def"
-	dict["4"] = "ghi"
-	dict["5"] = "jkl"
-	dict["6"] = "mno"
-	dict["7"] = "pqrs"
-	dict["8"] = "tuv"
-	dict["9"] = "wxyz"
-
-	for _, val := range digits {
-
-		num := string(val)
-		combineAll.WriteString(dict[num])
-
+	var output []string
+	if len(digits) != 0 {
+		backtrack("", digits, output)
 	}
 
-	allLetters := combineAll.String()
-	fmt.Println(string(allLetters))
-	track := make(map[string]string)
+	return output
+}
 
-	for i := 0; i < len(allLetters); i++ {
-		//fmt.Println(string(allLetters[i]))
-		for j := 0; j < len(allLetters)-1; j++ {
-			fmt.Println(string(allLetters[i]) + string(allLetters[j]))
+func backtrack(combination string, nextDigit string, arr []string) {
 
-			_, ok := track[string(allLetters[j])+string(allLetters[i])]
-			if !ok {
+	if len(nextDigit) == 0 {
+		arr = append(arr, combination)
+	} else {
+		dict := make(map[string]string)
+		dict["2"] = "abc"
+		dict["3"] = "def"
+		dict["4"] = "ghi"
+		dict["5"] = "jkl"
+		dict["6"] = "mno"
+		dict["7"] = "pqrs"
+		dict["8"] = "tuv"
+		dict["9"] = "wxyz"
 
-			}
+		digit := nextDigit[0:1]
+		letters := dict[string(digit)]
+
+		fmt.Println(letters)
+		fmt.Println(digit)
+		for i := 0; i < len(letters); i++ {
+			letter := string(dict[digit][i : i+1])
+			fmt.Println(letter)
+			fmt.Println(string(nextDigit[1]))
+			//backtrack(combination+letter, string(nextDigit[1]), arr)
 		}
 	}
-
-	return arrStr
 }
