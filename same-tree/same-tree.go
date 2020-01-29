@@ -7,22 +7,21 @@ import (
 
 func main() {
 
-	t1 := NewOrder(1)
-	t2 := NewOrder(1)
+	t1 := newOrder(1)
+	t2 := newOrder(1)
 
 	tree := isSameTree(t1, t2)
 	fmt.Println(tree)
 
-	r1 := NewRandom(3, 1)
-	r2 := NewRandom(3, 1)
+	r1 := newRandom(3, 1)
+	r2 := newRandom(3, 1)
 
 	tree = isSameTree(r1, r2)
 	fmt.Println(tree)
 
 }
 
-// New returns a new,ordered binary
-func NewOrder(k int) *TreeNode {
+func newOrder(k int) *TreeNode {
 	var t *TreeNode
 
 	test := []int{1, 2, 3, 4, 5, 6, 7, 8}
@@ -32,8 +31,7 @@ func NewOrder(k int) *TreeNode {
 	return t
 }
 
-// New returns a new,ordered binary
-func NewRandom(n, k int) *TreeNode {
+func newRandom(n, k int) *TreeNode {
 	var t *TreeNode
 	for _, v := range rand.Perm(n) {
 		t = insert(t, (1+v)*k)
@@ -53,6 +51,7 @@ func insert(t *TreeNode, v int) *TreeNode {
 	return t
 }
 
+//TreeNode : tree
 type TreeNode struct {
 	Left  *TreeNode
 	Val   int
