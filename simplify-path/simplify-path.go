@@ -6,9 +6,15 @@ import (
 
 func main() {
 
-	input := 4
-	output := fib(input)
+	input := "/home/"
+	output := simplifyPath(input)
 	fmt.Println(output)
+}
+
+func simplifyPath(path string) string {
+
+	return path
+
 }
 
 // public String simplifyPath(String path) {
