@@ -2,17 +2,24 @@ package main
 
 import (
 	"fmt"
+	"path/filepath"
 )
 
 func main() {
 
-	input := "/home/"
+	input := "/home/run"
 	output := simplifyPath(input)
 	fmt.Println(output)
 }
 
 func simplifyPath(path string) string {
 
+	//var stack []string
+
+	dir, file := filepath.Split(path)
+
+	fmt.Println(dir)
+	fmt.Println(file)
 	return path
 
 }
