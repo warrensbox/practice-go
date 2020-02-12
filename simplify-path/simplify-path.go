@@ -1,3 +1,16 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+
+	input := 4
+	output := fib(input)
+	fmt.Println(output)
+}
+
 // public String simplifyPath(String path) {
 //     Deque<String> stack = new LinkedList<>();
 //     Set<String> skip = new HashSet<>(Arrays.asList("..",".",""));
