@@ -2,24 +2,40 @@ package main
 
 import (
 	"fmt"
-	"path/filepath"
+	"strings"
 )
 
 func main() {
 
-	input := "/home/run"
+	input := "/../"
 	output := simplifyPath(input)
 	fmt.Println(output)
 }
 
 func simplifyPath(path string) string {
 
-	//var stack []string
+	var stack []string
 
-	dir, file := filepath.Split(path)
+	directory := strings.Split(path, "/")
 
-	fmt.Println(dir)
-	fmt.Println(file)
+	for _, dir := range directory {
+
+		fmt.Println(dir)
+		if dir == ".." && len(stack) > 0 {
+			fmt.Println("pop")
+			pop(stack)
+		} else {
+			fmt.Println("push")
+			stack = push(stack, dir)
+		}
+	}
+
+	fmt.Println(stack)
+
+	str := strings.Join(stack[:], "/")
+
+	fmt.Println(str)
+
 	return path
 
 }
@@ -35,3 +51,21 @@ func simplifyPath(path string) string {
 //     for (String dir : stack) res = "/" + dir + res;
 //     return res.isEmpty() ? "/" : res;
 // }
+
+func push(stack []string, charAt string) []string {
+
+	stack = append(stack, charAt) // Push
+
+	return stack
+}
+
+func pop(stack []string) (string, []string) {
+	val := ""
+	n := len(stack) - 1 // Top element
+	val = stack[n]
+	stack = stack[:n] // Pop
+
+	fmt.Println("popping")
+	fmt.Println(len(stack))
+	return val, stack
+}
