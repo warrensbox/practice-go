@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
 
@@ -14,7 +17,48 @@ func main() {
 
 func addBinary(a string, b string) string {
 
-	return a
+	n := len(a)
+	m := len(b)
+
+	if n < m {
+		return addBinary(b, a)
+	}
+
+	L := max(n, m)
+
+	// result.WriteString(
+	var result strings.Builder
+	carry := 0
+	j := m - 1
+
+	for i := L - 1; i > -1; i-- {
+
+		if string(a[i]) == "1" {
+			carry++
+		}
+
+		if j > -1 {
+			//need to minus j --
+			if string(b[j]) == "1" {
+				carry++
+			}
+		}
+
+		if carry%2 == 1 {
+			result.WriteString("1")
+		} else {
+			result.WriteString("0")
+		}
+
+		carry = carry / 2
+
+		if carry == 1 {
+			result.WriteString("1")
+		}
+	}
+
+	//TODO reverse string and return
+	return result.String()
 }
 
 // class Solution {
@@ -40,3 +84,10 @@ func addBinary(a string, b string) string {
 // 	  return sb.toString();
 // 	}
 //   }
+
+func max(x, y int) int {
+	if x < y {
+		return y
+	}
+	return x
+}
