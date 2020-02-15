@@ -7,7 +7,7 @@ import (
 
 func main() {
 
-	input := "/../"
+	input := "/../test/../g"
 	output := simplifyPath(input)
 	fmt.Println(output)
 }
@@ -17,40 +17,42 @@ func simplifyPath(path string) string {
 	var stack []string
 
 	directory := strings.Split(path, "/")
-
+	fmt.Println(len(directory))
 	for _, dir := range directory {
-
-		fmt.Println(dir)
-		if dir == ".." && len(stack) > 0 {
-			fmt.Println("pop")
-			pop(stack)
-		} else {
-			fmt.Println("push")
-			stack = push(stack, dir)
+		fmt.Println("dir", dir)
+		if dir == ".." {
+			if len(stack) > 0 {
+				fmt.Println("pop", dir)
+				_, stack = pop(stack)
+			}
+		} else if dir != "" {
+			if dir != "." {
+				fmt.Println("push", dir)
+				stack = push(stack, dir)
+			}
 		}
 	}
 
-	fmt.Println(stack)
+	res := ""
+	for _, s := range stack {
 
-	str := strings.Join(stack[:], "/")
+		if string(s) == "" {
+			continue
+		} else {
+			fmt.Println("s", s)
+			res = res + "/" + s
+		}
 
-	fmt.Println(str)
+		fmt.Println("res", res)
+	}
 
-	return path
+	fmt.Println(res)
+	if res == "" {
+		res = "/"
+	}
+	return res
 
 }
-
-// public String simplifyPath(String path) {
-//     Deque<String> stack = new LinkedList<>();
-//     Set<String> skip = new HashSet<>(Arrays.asList("..",".",""));
-//     for (String dir : path.split("/")) {
-//         if (dir.equals("..") && !stack.isEmpty()) stack.pop();
-//         else if (!skip.contains(dir)) stack.push(dir);
-//     }
-//     String res = "";
-//     for (String dir : stack) res = "/" + dir + res;
-//     return res.isEmpty() ? "/" : res;
-// }
 
 func push(stack []string, charAt string) []string {
 
@@ -65,7 +67,6 @@ func pop(stack []string) (string, []string) {
 	val = stack[n]
 	stack = stack[:n] // Pop
 
-	fmt.Println("popping")
 	fmt.Println(len(stack))
 	return val, stack
 }
