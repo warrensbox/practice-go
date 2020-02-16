@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"log"
+	"strconv"
 )
 
 func main() {
@@ -15,79 +16,34 @@ func main() {
 	fmt.Println(ans)
 }
 
-func addBinary(a string, b string) string {
-
-	n := len(a)
-	m := len(b)
-
-	if n < m {
-		return addBinary(b, a)
+func getInt(index int, s string) int {
+	num, err := strconv.Atoi(string(s[index]))
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	L := max(n, m)
-
-	// result.WriteString(
-	var result strings.Builder
-	carry := 0
-	j := m - 1
-
-	for i := L - 1; i > -1; i-- {
-
-		if string(a[i]) == "1" {
-			carry++
-		}
-
-		if j > -1 {
-			//need to minus j --
-			if string(b[j]) == "1" {
-				carry++
-			}
-		}
-
-		if carry%2 == 1 {
-			result.WriteString("1")
-		} else {
-			result.WriteString("0")
-		}
-
-		carry = carry / 2
-
-		if carry == 1 {
-			result.WriteString("1")
-		}
-	}
-
-	//TODO reverse string and return
-	return result.String()
+	return num
 }
 
-// class Solution {
-// 	public String addBinary(String a, String b) {
-// 	  int n = a.length(), m = b.length();
-// 	  if (n < m) return addBinary(b, a);
-// 	  int L = Math.max(n, m);
+func addBinary(a string, b string) string {
 
-// 	  StringBuilder sb = new StringBuilder();
-// 	  int carry = 0, j = m - 1;
-// 	  for(int i = L - 1; i > -1; --i) {
-// 		if (a.charAt(i) == '1') ++carry;
-// 		if (j > -1 && b.charAt(j--) == '1') ++carry;
+	i := len(a) - 1
+	fmt.Println("i", i)
+	j := len(b) - 1
+	fmt.Println("j", j)
+	carry := 0
+	fmt.Println("carry", carry)
+	//var buffer bytes.Buffer
 
-// 		if (carry % 2 == 1) sb.append('1');
-// 		else sb.append('0');
+	for i >= 0 || j >= 0 {
 
-// 		carry /= 2;
-// 	  }
-// 	  if (carry == 1) sb.append('1');
-// 	  sb.reverse();
+		sum := carry
+		fmt.Println("sum", sum)
 
-// 	  return sb.toString();
-// 	}
-//   }
-
-func max(x, y int) int {
-	if x < y {
-		return y
+		if i >= 0 {
+			partA := getInt(i, a)
+			fmt.Println(partA)
+		}
 	}
-	return x
+
 }
