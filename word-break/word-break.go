@@ -4,8 +4,8 @@ import "fmt"
 
 func main() {
 
-	str := "leetcode"
-	wordDict := []string{"leet", "code"}
+	str := "leco"
+	wordDict := []string{"le", "co"}
 
 	output := wordBreak(str, wordDict)
 
@@ -29,6 +29,7 @@ func wordBreak(str string, wordDict []string) bool {
 	// init: f[0] = true since s[0:0] is empty string which default to true
 	breakable[0] = true
 
+	fmt.Println("Length", len(str))
 	// func: f[i] = f[j] == true && s[j : i] is in dict for j>= 0 && j <= i - 1
 	// note the state is inclusive, so f[j] means s[0:j] with j inclusive, so the rest of string is s[j:i] not s[j+1:i]
 	// j's range is from 0, to i - 1 because if j = i, s[j:i] becomes empty
@@ -38,9 +39,24 @@ func wordBreak(str string, wordDict []string) bool {
 			fmt.Println("j", j)
 			substr := str[j:i]
 			fmt.Println("substr", substr)
+
+			_, ok := wordMap[substr]
+
+			fmt.Println("wordMap[substr]", wordMap[substr])
+
+			fmt.Println("breakable[j]", breakable[j])
+
+			fmt.Println("breakable[i]", breakable[i])
+
+			if breakable[j] == true && ok {
+				breakable[i] = true
+				fmt.Println("breakable[i]", breakable[i])
+				break
+			}
+
 		}
 	}
 
-	return false
+	return breakable[len(str)]
 
 }
