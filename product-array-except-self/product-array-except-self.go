@@ -15,6 +15,32 @@ func main() {
 func productExceptSelf(nums []int) []int {
 
 	N := len(nums)
+	output := make([]int, N)
+
+	output[0] = 1
+
+	for i := 1; i < N; i++ {
+		number := nums[i-1]
+		left := output[i-1]
+		output[i] = number * left
+	}
+
+	R := 1
+	for i := N - 1; i >= 0; i-- {
+		out := output[i]
+		output[i] = out * R
+		R = R * nums[i]
+
+	}
+
+	fmt.Println(output)
+
+	return output
+}
+
+func productExceptSelf2(nums []int) []int {
+
+	N := len(nums)
 
 	leftProduct := make([]int, N)
 	rightProduct := make([]int, N)
