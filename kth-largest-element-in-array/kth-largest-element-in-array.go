@@ -71,7 +71,7 @@ func partition(nums []int, start int, end int) int {
 			fmt.Println("NUMS", nums)
 			right--
 			fmt.Println("right", right)
-			fmt.Println("-RRRRRR-")
+			fmt.Println("-RRRRR-")
 		}
 		fmt.Println("-FFFFF-")
 		fmt.Println("left", left)
