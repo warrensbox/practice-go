@@ -83,7 +83,7 @@ func partition(nums []int, start int, end int) int {
 		}
 		fmt.Println("NUMS", nums)
 	}
-	fmt.Println("SWITCING", nums)
+	fmt.Println("SWITCHING", nums)
 	nums[right], nums[start] = nums[start], nums[right]
 	fmt.Println("NUMS", nums)
 	return right
