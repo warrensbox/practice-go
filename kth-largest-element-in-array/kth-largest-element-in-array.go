@@ -59,7 +59,7 @@ func partition(nums []int, start int, end int) int {
 	for left <= right {
 		for left <= right && nums[left] <= pivot {
 			fmt.Println("nums[left]", nums[left])
-			fmt.Println("left", left)
+			fmt.Println("left before", left)
 			fmt.Println("NUMS", nums)
 			left++
 			fmt.Println("left", left)
@@ -71,7 +71,7 @@ func partition(nums []int, start int, end int) int {
 			fmt.Println("NUMS", nums)
 			right--
 			fmt.Println("right", right)
-			fmt.Println("-RRRRRR-")
+			fmt.Println("-RRRRR-")
 		}
 		fmt.Println("-FFFFF-")
 		fmt.Println("left", left)
@@ -83,7 +83,7 @@ func partition(nums []int, start int, end int) int {
 		}
 		fmt.Println("NUMS", nums)
 	}
-	fmt.Println("SWITCING", nums)
+	fmt.Println("SWITCHING", nums)
 	nums[right], nums[start] = nums[start], nums[right]
 	fmt.Println("NUMS", nums)
 	return right
