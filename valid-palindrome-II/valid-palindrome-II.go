@@ -1,10 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+	"regexp"
+	"strings"
+)
 
 func main() {
 
-	input := "aba"
+	input := "abae"
 	output := validPalindrome(input)
 
 	fmt.Println(output)
@@ -35,12 +40,12 @@ func validPalindrome(s string) bool {
 	return false
 }
 
-func isPanlindromeRange(s string, i, j) bool{
+func isPanlindromeRange(s string, i int, j int) bool {
 
-	for k := i; k <= i+(j-1)/2 ; k++{
+	for k := i; k <= i+(j-1)/2; k++ {
 		if s[i] != s[j-k+i] {
 			return false
 		}
-		return true
 	}
+	return true
 }
