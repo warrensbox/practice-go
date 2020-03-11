@@ -6,7 +6,7 @@ import (
 
 func main() {
 
-	input := "abbaac"
+	input := "abca"
 	output := validPalindrome(input)
 
 	fmt.Println(output)
