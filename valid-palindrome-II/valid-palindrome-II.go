@@ -2,14 +2,11 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"regexp"
-	"strings"
 )
 
 func main() {
 
-	input := "abae"
+	input := "abbaac"
 	output := validPalindrome(input)
 
 	fmt.Println(output)
@@ -18,34 +15,36 @@ func main() {
 
 func validPalindrome(s string) bool {
 
-	reg, err := regexp.Compile("[^a-zA-Z0-9]+")
-	if err != nil {
-		log.Fatal(err)
-	}
+	start := 0
+	end := len(s) - 1
 
-	processedString := reg.ReplaceAllString(s, "")
+	for start < end {
 
-	processedString = strings.ToLower(processedString)
-
-	j := len(processedString) - 1
-
-	for i := 0; i < len(processedString)/2; i++ {
-		if processedString[i] != processedString[j] {
-			fmt.Println("Test")
-			break
-		}
-		j--
-	}
-
-	return false
-}
-
-func isPanlindromeRange(s string, i int, j int) bool {
-
-	for k := i; k <= i+(j-1)/2; k++ {
-		if s[i] != s[j-k+i] {
+		if s[start] != s[end] {
+			if isValidPalindrome(s, start+1, end) {
+				return true
+			}
+			if isValidPalindrome(s, start, end-1) {
+				return true
+			}
 			return false
 		}
+		start++
+		end--
 	}
+
+	return true
+}
+
+func isValidPalindrome(s string, start int, end int) bool {
+
+	for start < end {
+		if s[start] != s[end] {
+			return false
+		}
+		start++
+		end--
+	}
+
 	return true
 }
