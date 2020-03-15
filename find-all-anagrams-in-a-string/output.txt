@@ -1,0 +1,123 @@
+l-anagrams-in-a-string.go
+[-1 -1 -1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+0000000000000
+char LLOP c
+charCount [-1 -1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+totalCountofEachCharInP 1
+--------
+result []
+end 0
+start 0
+0000000000000
+char LLOP b
+charCount [-1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+totalCountofEachCharInP 2
+--------
+result []
+end 1
+start 0
+0000000000000
+char LLOP a
+charCount [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+totalCountofEachCharInP 3
+--------
+result [0]
+end 2
+start 0
+########
+TOTTALL 3
+char IF c
+totalCountofEachCharInPLATER 2
+[0 0 -1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+0000000000000
+char LLOP c
+charCount [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+totalCountofEachCharInP 3
+--------
+result [0 1]
+end 3
+start 1
+########
+TOTTALL 3
+char IF b
+totalCountofEachCharInPLATER 2
+[0 -1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+0000000000000
+char LLOP b
+charCount [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+totalCountofEachCharInP 3
+--------
+result [0 1 2]
+end 4
+start 2
+########
+TOTTALL 3
+char IF a
+totalCountofEachCharInPLATER 2
+[-1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+0000000000000
+char LLOP a
+charCount [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+totalCountofEachCharInP 3
+--------
+result [0 1 2 3]
+end 5
+start 3
+########
+TOTTALL 3
+char IF c
+totalCountofEachCharInPLATER 2
+[0 0 -1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+0000000000000
+char LLOP b
+charCount [0 1 -1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+totalCountofEachCharInP 2
+--------
+result [0 1 2 3]
+end 6
+start 4
+########
+TOTTALL 3
+char IF b
+totalCountofEachCharInPLATER 2
+[0 0 -1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+0000000000000
+char LLOP a
+charCount [1 0 -1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+totalCountofEachCharInP 2
+--------
+result [0 1 2 3]
+end 7
+start 5
+########
+TOTTALL 3
+char IF a
+totalCountofEachCharInPLATER 2
+[0 0 -1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+0000000000000
+char LLOP c
+charCount [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+totalCountofEachCharInP 3
+--------
+result [0 1 2 3 6]
+end 8
+start 6
+########
+TOTTALL 3
+char IF b
+totalCountofEachCharInPLATER 2
+[0 -1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+0000000000000
+char LLOP d
+charCount [0 -1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+totalCountofEachCharInP 2
+--------
+result [0 1 2 3 6]
+end 9
+start 7
+########
+TOTTALL 3
+char IF a
+totalCountofEachCharInPLATER 1
+[-1 -1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+[0 1 2 3 6]
