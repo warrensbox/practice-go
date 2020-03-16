@@ -14,7 +14,7 @@ func main() {
 }
 
 //sol1
-func subarraySum(nums []int, k int) int {
+func subarraySum1(nums []int, k int) int {
 
 	count := 0
 	for start := 0; start < len(nums); start++ {
@@ -34,9 +34,19 @@ func subarraySum(nums []int, k int) int {
 	return count
 }
 
-func subarraySum2(nums []int, k int) int {
+func subarraySum(nums []int, k int) int {
 
 	count := 0
+	sum := 0
 
+	cache := make(map[int]int)
+
+	cache[0] = 1
+
+	for _, val := range nums {
+		sum += val
+		count += cache[sum-k]
+		cache[sum]++
+	}
 	return count
 }
