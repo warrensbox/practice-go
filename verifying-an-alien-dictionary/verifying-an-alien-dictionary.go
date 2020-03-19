@@ -4,14 +4,19 @@ import "fmt"
 
 func main() {
 
-	//words := []string{"hello", "leetcode"} //true
+	words := []string{"hello", "leetcode"} //true
 	//words := []string{"word", "world", "row"} //false
-	words := []string{"apple", "app"} //false
+	//words := []string{"apple", "app"} //false
+	//words := []string{"kuvp", "q"} //true
+	//words := []string{"l", "h"}          //false
+	//words := []string{"iekm", "tpnhnbe"} //false
 
-	//order := "hlabcdefgijkmnopqrstuvwxyz"//true
+	order := "hlabcdefgijkmnopqrstuvwxyz" //true
 	//order := "worldabcefghijkmnpqstuvxyz" //false
-	order := "abcdefghijklmnopqrstuvwxyz" //false
-
+	//order := "abcdefghijklmnopqrstuvwxyz" //false
+	//order := "ngxlkthsjuoqcpavbfdermiywz" //true
+	//order := "xkbwnqozvterhpjifgualycmds" //true
+	//order := "loxbzapnmstkhijfcuqdewyvrg"
 	output := isAlienSorted(words, order)
 
 	fmt.Println(output)
@@ -53,15 +58,18 @@ func compare(word1, word2 string, charMap [26]int) bool {
 			continue
 		}
 
-		if charAtWord1 != charAtWord1 {
+		if charAtWord1 != charAtWord2 {
 			if charMap[charAtWord1-'a'] > charMap[charAtWord2-'a'] {
 				return false
+			} else {
+				return true
 			}
 		}
 
 	}
 
 	if len(word1) > len(word2) {
+
 		return false
 	}
 
