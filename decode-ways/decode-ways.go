@@ -1,5 +1,6 @@
 package main
 
+//watch https://www.youtube.com/watch?v=YcJTyrG3bZs
 import (
 	"fmt"
 	"strconv"
