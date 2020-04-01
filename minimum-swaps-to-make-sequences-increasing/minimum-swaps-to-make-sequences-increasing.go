@@ -23,17 +23,33 @@ func minSwap(A []int, B []int) int {
 
 	for i := 1; i < len(A); i++ {
 
+		fmt.Println("--FOR LOOP START---")
+
 		n2 := math.MaxInt32
 		s2 := math.MaxInt32
 
+		fmt.Print("n2", n2)
+		fmt.Println(" s2", s2)
+		fmt.Print(" A[i-1]", A[i-1])
+		fmt.Println(" A[i] ", A[i])
+		fmt.Print(" B[i-1] ", B[i-1])
+		fmt.Println(" B[i]", B[i])
 		if A[i-1] < A[i] && B[i-1] < B[i] {
+			fmt.Println("------INLINE-----")
+			fmt.Println("n2", n2)
+			fmt.Println("s2", s2)
+			fmt.Println("n1", n1)
+			fmt.Println("s1", s1)
 			n2 = Min(n2, n1)
-			s2 = Min(s2, s2+1)
+			s2 = Min(s2, s1+1)
 		}
 
 		if A[i-1] < B[i] && B[i-1] < A[i] {
+			fmt.Println("------DIAGONAL-----")
 			n2 = Min(n2, s1)
-			s2 = Min(s2, n2+1)
+			s2 = Min(s2, n1+1)
+			fmt.Println("n2", n2)
+			fmt.Println("s2", s2)
 		}
 
 		n1 = n2
