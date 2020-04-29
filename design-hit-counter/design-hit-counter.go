@@ -1,4 +1,5 @@
 package main
+
 //disclaimer - I have no idea how this works for now
 import "fmt"
 
@@ -20,6 +21,7 @@ func main() {
 }
 
 const size = 300
+
 type HitCounter struct {
 	hits  []int
 	total int
@@ -29,11 +31,11 @@ type HitCounter struct {
 /** Initialize your data structure here. */
 func Constructor() HitCounter {
 	return HitCounter{
-		hit : make([]int,size)
+		hits: make([]int, size),
 	}
 }
 
-func (this *HitCounter) clear(slots int, t int){
+func (this *HitCounter) clear(slots int, t int) {
 	if slots <= 0 {
 		return
 	}
@@ -42,28 +44,28 @@ func (this *HitCounter) clear(slots int, t int){
 		slots = size
 	}
 
-	for i:=0; i < slots; i++{
-		this.total -= this.hits[this.start % size]
-		this.hits[this.start% size] = 0
-		this.start = this.start -1
+	for i := 0; i < slots; i++ {
+		this.total -= this.hits[this.start%size]
+		this.hits[this.start%size] = 0
+		this.start = this.start - 1
 	}
 
 	if slots == size {
-		this.start = t-(t%size)
+		this.start = t - (t % size)
 	}
 }
 
 /** Record a hit.
   @param timestamp - The current timestamp (in seconds granularity). */
 func (this *HitCounter) Hit(timestamp int) {
-	this.clear(timestamp - size - this.start, timestamp)
-    this.hits[(timestamp - 1) % size]++
-    this.total++
+	this.clear(timestamp-size-this.start, timestamp)
+	this.hits[(timestamp-1)%size]++
+	this.total++
 }
 
 /** Return the number of hits in the past 5 minutes.
   @param timestamp - The current timestamp (in seconds granularity). */
 func (this *HitCounter) GetHits(timestamp int) int {
 	this.clear(timestamp-size-this.start, timestamp)
-    return this.total
+	return this.total
 }
