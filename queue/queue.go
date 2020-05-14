@@ -14,3 +14,6 @@ func (q *Queue) DeQueue() (n TreeNode) {
 func (q *Queue) Len() int {
 	return len(*q)
 }
+
+//this is similar to channels
+
