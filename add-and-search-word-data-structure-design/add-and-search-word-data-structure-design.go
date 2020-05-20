@@ -1,6 +1,15 @@
 package main
 
+import "fmt"
+
 func main() {
+
+	obj := Constructor()
+	fmt.Println(obj)
+	obj.AddWord("hello")
+	output1 := obj.Search("hello")
+
+	fmt.Println(output1)
 
 }
 
@@ -26,7 +35,9 @@ func Constructor() WordDictionary {
 func (this *WordDictionary) AddWord(word string) {
 	curr := this.root
 	for _, r := range word {
+		fmt.Println("string(r)", string(r))
 		node, ok := curr.links[r]
+		fmt.Println("ok", ok)
 		if !ok {
 			curr.links[r] = &Node{
 				links: make(map[rune]*Node),
