@@ -1,4 +1,4 @@
 # go-examples
 
-snapshot-array
+
 
