@@ -5,8 +5,6 @@ import (
 	"sort"
 )
 
-const maxLen = 10
-
 func main() {
 	queries := []string{"bbbbf", "cc"}
 	words := []string{"cccccc", "ccddd", "ccc", "cccc"}
