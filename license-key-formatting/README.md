@@ -19,6 +19,10 @@ Input: S = "2-5g-3-J", K = 2
 Output: "2-5G-3J"
 
 Explanation: The string S has been split into three parts, each part has 2 characters except the first part as it could be shorter as mentioned above.
+
+
+
+
 Note:
 The length of string S will not exceed 12,000, and K is a positive integer.
 String S consists only of alphanumerical characters (a-z and/or A-Z and/or 0-9) and dashes(-).
