@@ -1,57 +1,52 @@
 package main
 
-func main() {
+import "fmt"
 
+func main() {
+	obj := Constructor(3)
+	obj.Set(4, 5)
+
+	param_2 := obj.Snap()
+	fmt.Println(param_2)
+	obj.Set(3, 6)
+	param_3 := obj.Get(3, 0)
+	fmt.Println(param_3)
 }
 
+type MapArray map[int]int //key: index, val: value
+
 type SnapshotArray struct {
-	metadata [][][]int
-	seq      int
+	snapshots map[int]MapArray
+	current   MapArray
 }
 
 func Constructor(length int) SnapshotArray {
-	return SnapshotArray{
-		metadata: make([][][]int, length),
-		seq:      0,
-	}
-}
-func (sa *SnapshotArray) Set(index int, val int) {
-	if len(sa.metadata[index]) == 0 || sa.metadata[index][len(sa.metadata[index])-1][0] != sa.seq {
-		sa.metadata[index] = append(sa.metadata[index], []int{sa.seq, val})
-		return
-	}
-	sa.metadata[index][len(sa.metadata[index])-1][1] = val
+	snapshots := make(map[int]MapArray)
+	current := make(MapArray)
+	snapshotArr := SnapshotArray{snapshots, current}
+	return snapshotArr
 }
 
-func (sa *SnapshotArray) Snap() int {
-	sa.seq++
-	return sa.seq - 1
+func (this *SnapshotArray) Set(index int, val int) {
+	this.current[index] = val
+	fmt.Println("current", this.current)
+	return
 }
 
-func (sa *SnapshotArray) Get(index int, snapID int) int {
-	return findLE(sa.metadata[index], snapID)
+func (this *SnapshotArray) Snap() int {
+	snapID := len(this.snapshots)
+	fmt.Println("snapID", snapID)
+	this.snapshots[snapID] = make(MapArray)
+	fmt.Println("snapshots", this.snapshots)
+	for k, v := range this.current {
+		fmt.Println("k", k)
+		fmt.Println("v", v)
+		this.snapshots[snapID][k] = v
+	}
+	fmt.Println("snapshots", this.snapshots)
+	return snapID
 }
 
-func findLE(data [][]int, snapID int) int {
-	if len(data) == 0 {
-		return 0
-	}
-	if data[0][0] > snapID {
-		return 0
-	}
-	if data[len(data)-1][0] <= snapID {
-		return data[len(data)-1][1]
-	}
-	l, r := 0, len(data)-1
-	for l <= r {
-		m := (l + r) >> 1
-		if data[m][0] == snapID {
-			return data[m][1]
-		} else if data[m][0] < snapID {
-			l = m + 1
-		} else {
-			r = m - 1
-		}
-	}
-	return data[r][1]
+func (this *SnapshotArray) Get(index int, snap_id int) int {
+	return this.snapshots[snap_id][index]
 }
