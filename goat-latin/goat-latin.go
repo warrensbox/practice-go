@@ -18,17 +18,18 @@ func toGoatLatin(S string) string {
 	add := "a"
 	for _, word := range words {
 
-		fmt.Println(word[:1])
+		//fmt.Println(word[:1])
 		switch word[:1] {
 		case "a", "e", "i", "o", "u", "A", "E", "I", "O", "U":
 			word = word + "ma"
 		default:
 			word = word[1:] + word[:1] + "ma"
 		}
-		fmt.Println(word + add)
+		//fmt.Println(word + add)
 		result.WriteString(word + add + " ")
 		add += "a"
 
 	}
-	return result.String()
+	temp := result.String()
+	return temp[:len(temp)-1]
 }
