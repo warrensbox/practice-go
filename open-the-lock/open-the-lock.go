@@ -85,6 +85,8 @@ func openLock(deadends []string, target string) int {
 	return res
 }
 
+//try with channels
+
 func openLock2(deadends []string, target string) int {
 	visited := make(map[string]bool)
 	for _, dead := range deadends {
