@@ -25,7 +25,7 @@ func toGoatLatin(S string) string {
 		default:
 			word = word[1:] + word[:1] + "ma"
 		}
-		//fmt.Println(word + add)
+
 		result.WriteString(word + add + " ")
 		add += "a"
 
