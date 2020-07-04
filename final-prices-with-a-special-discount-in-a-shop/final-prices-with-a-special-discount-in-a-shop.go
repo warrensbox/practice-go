@@ -25,6 +25,7 @@ func finalPrices(prices []int) []int {
 			stack = pop(stack)
 		}
 
+		//save the index not the value itself, can it be the other way
 		stack = push(stack, i)
 	}
 
