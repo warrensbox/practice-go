@@ -8,6 +8,7 @@
  * }
  */
 
+ //IS THIS BFS?
 func preorder(root *Node) []int {
 
 	res := make([]int, 0)
