@@ -1,12 +1,11 @@
 //https://www.youtube.com/watch?v=BHB0B1jFKQc&t=138s
 
-/**
- * Definition for a Node.
- * type Node struct {
- *     Val int
- *     Children []*Node
- * }
- */
+
+type Node struct {
+    Val int
+    Children []*Node
+}
+
 
  //IS THIS BFS?
 func preorder(root *Node) []int {
