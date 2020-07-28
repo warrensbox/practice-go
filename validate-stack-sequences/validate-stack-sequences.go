@@ -29,7 +29,7 @@ func validateStackSequences(pushed []int, popped []int) bool {
 	fmt.Println(j)
 	fmt.Println(len(pushed))
 
-	return false
+	return j == len(pushed)
 
 }
 
