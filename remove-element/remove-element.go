@@ -1,33 +1,28 @@
 package main
 
-
 import (
 	"fmt"
 )
 
+func main() {
 
-func main(){
-
-	inputArr := []int{3,2,1,2,5}
+	inputArr := []int{3, 2, 1, 2, 5}
 	targetVal := 1
-	output := removeElement(inputArr,targetVal)
-    fmt.Println(output)
+	output := removeElement(inputArr, targetVal)
+	fmt.Println(output)
 }
 
-
 func removeElement(nums []int, val int) int {
-
 
 	lengthArr := len(nums)
 	i := 0
 	for i < lengthArr {
 
-		if  nums[i] == val {
-			fmt.Println("same")
+		if nums[i] == val {
 			nums[i] = nums[lengthArr-1]
-			fmt.Println("nums[i]",nums[i])
+			fmt.Println("nums[i]", nums[i])
 			lengthArr--
-		}else{
+		} else {
 			fmt.Println("Not same")
 			i++
 		}
@@ -36,5 +31,5 @@ func removeElement(nums []int, val int) int {
 	fmt.Println(lengthArr)
 	fmt.Println(nums)
 	return lengthArr
-    
+
 }
