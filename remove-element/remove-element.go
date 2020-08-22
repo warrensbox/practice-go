@@ -28,8 +28,8 @@ func removeElement(nums []int, val int) int {
 		}
 	}
 
-	fmt.Println(lengthArr)
-	fmt.Println(nums)
+	fmt.Println("lengthArr", lengthArr)
+	fmt.Println("nums", nums)
 	return lengthArr
 
 }
