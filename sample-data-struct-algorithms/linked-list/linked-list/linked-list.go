@@ -29,7 +29,21 @@ func (l *List) Add(item interface{}) {
 	}
 }
 
-func (l *List) nthToLast(k int) {
+func (l *List) nthToLastRecussion(head *Node, k int) int {
+
+	if head == nil {
+		return 0
+	}
+
+	index := l.nthToLastRecussion(head.next, k) + 1
+
+	if index == k {
+		fmt.Printf("%s and %v", head.item, k)
+	}
+	return index
+}
+
+func (l *List) nthToLastPointer(k int) *Node {
 	//have 2 pointer
 	pointer1 := l.head
 	pointer2 := l.head
@@ -37,17 +51,20 @@ func (l *List) nthToLast(k int) {
 	/*move p1 k nodes into the list*/
 	for i := 0; i < k; i++ {
 		if pointer1 == nil {
-			return
+			return nil
 		}
 		pointer1 = pointer1.next
 	}
 
+	/* move them at the same pace*/
+	/* when p1 hits the end, p2 will be at the right element */
 	for pointer1 != nil {
 		pointer1 = pointer1.next
 		pointer2 = pointer2.next
 	}
 
 	fmt.Println(pointer2)
+	return pointer2
 }
 
 func (l *List) RemoveDups() {
@@ -90,6 +107,10 @@ func main() {
 	list.Add("1")
 	list.Add("2")
 	list.Add("3")
-	list.RemoveDups()
+	list.Add("1")
+	list.Add("2")
+	list.Add("3")
+	list.nthToLastPointer(3)
+	//list.RemoveDups()
 	list.ShowList()
 }
