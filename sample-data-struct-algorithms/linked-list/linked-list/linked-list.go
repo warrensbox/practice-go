@@ -29,6 +29,33 @@ func (l *List) Add(item interface{}) {
 	}
 }
 
+func (l *List) countNumberOfNodes() int {
+	list := l.head
+	count := 0
+	for list != nil {
+		list = list.next
+		count++
+	}
+	return count
+}
+
+func (l *List) deleteMiddleNode() {
+
+	list := l.head
+	count := l.countNumberOfNodes()
+
+	fmt.Println(count)
+
+	mid := count / 2
+
+	for mid > 1 {
+		list = list.next
+		mid--
+	}
+
+	list.next = list.next.next
+}
+
 func (l *List) nthToLastRecussion(head *Node, k int) int {
 
 	if head == nil {
@@ -99,18 +126,19 @@ func main() {
 
 	list := List{}
 	list.ShowList()
-	list.Add("1")
-	list.Add("2")
-	list.Add("3")
-	list.Add("4")
-	list.Add("5")
-	list.Add("1")
-	list.Add("2")
-	list.Add("3")
-	list.Add("1")
-	list.Add("2")
-	list.Add("3")
+	list.Add("a")
+	list.Add("b")
+	list.Add("c")
+	list.Add("d")
+	list.Add("e")
+	list.Add("f")
+	list.Add("g")
+	list.Add("h")
+	list.Add("i")
+	list.Add("j")
+	list.Add("k")
 	list.nthToLastPointer(3)
 	//list.RemoveDups()
+	list.deleteMiddleNode()
 	list.ShowList()
 }
