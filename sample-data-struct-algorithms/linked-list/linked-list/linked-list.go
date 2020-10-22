@@ -411,6 +411,32 @@ func getTailAndSize(list *List) *TailSize {
 	return &tailSize
 }
 
+func (l *List) HasHoop() {
+	slow := l.head
+	fast := l.head
+
+	for fast != nil && fast.next != nil {
+		slow = slow.next
+		fast = fast.next.next
+		if slow == fast {
+			break
+		}
+	}
+
+	if fast == nil && fast.next == nil {
+		fmt.Println("No loop")
+		return
+	}
+
+	slow = l.head
+	for slow != fast {
+		slow = slow.next
+		fast = fast.next
+	}
+
+	fmt.Println("found loop at %v", *fast) //or slow (same thing)
+}
+
 func main() {
 
 	//list := List{}
