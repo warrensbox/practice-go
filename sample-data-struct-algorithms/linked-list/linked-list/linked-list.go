@@ -500,3 +500,8 @@ func main() {
 	list6.isPalindrome()
 
 }
+
+
+func (l *List) DeleteNode {
+	
+}
