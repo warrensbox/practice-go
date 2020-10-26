@@ -501,7 +501,7 @@ func main() {
 
 }
 
+//need to do
+// func (l *List) DeleteNode {
 
-func (l *List) DeleteNode {
-	
-}
+// }
