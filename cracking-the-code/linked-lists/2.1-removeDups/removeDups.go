@@ -1,48 +1,78 @@
 package main
 
-import (
-	"container/list"
-	"fmt"
-)
+import "fmt"
 
 func main() {
 
-	dict := make(map[interface{}]bool)
+	list := List{}
 
-	previous := list.Element{}
-	list := list.New()
+	list.Add(1)
+	list.Add(2)
+	list.Add(3)
+	list.Add(1)
+	list.Add(3)
+	list.RemoveDups()
+	list.ShowList()
+}
 
-	list.PushBack(1)
-	list.PushBack(2)
-	list.PushBack(3)
-	list.PushBack(1)
+func (l *List) RemoveDups() {
 
-	node := list.Front()
+	hash := make(map[interface{}]bool)
+	previous := &Node{}
+	list := l.head
 
-	for node != nil {
-		if _, ok := dict[node.Value]; ok {
-			previous.Next().Value = node.Next()
+	for list != nil {
+
+		if _, ok := hash[list.item]; ok {
+			previous.next = list.next
 		} else {
-			dict[node.Value] = true
-			previous = *node
+			hash[list.item] = true
+			previous = list
 		}
 
-		//fmt.Println(e.Value)
-
-		//break
-		node = node.Next()
+		list = list.next
 	}
 
-	n := list.Front()
+}
 
-	for list.Len() > 0 {
-		for n != nil {
+/* HELPER CODE - NOT USED FOR GRADING */
+//Node struct
+type Node struct {
+	item interface{}
+	next *Node
+}
 
-			fmt.Println(n.Value)
-			//l.queueCat.Remove(e) // Dequeue
-			//break
-			n = n.Next()
+//List struct
+type List struct {
+	head *Node
+}
+
+//Add : add item to list
+func (l *List) Add(item interface{}) {
+
+	var node Node
+	node.item = item
+
+	if l.head == nil {
+		l.head = &node
+	} else {
+		list := l.head
+		for list.next != nil {
+			list = list.next
 		}
+		list.next = &node
+	}
+
+}
+
+//ShowList : show all list of item
+func (l *List) ShowList() {
+
+	list := l.head
+
+	for list != nil {
+		fmt.Printf("%+v ->", list.item)
+		list = list.next
 	}
 
 }

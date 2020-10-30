@@ -1,0 +1,140 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+
+	//examples
+	//AddToLinkedList()
+	//RemoveFromLinkedList()
+	FindInLinkedList()
+
+}
+
+//Node struct
+type Node struct {
+	item interface{}
+	next *Node
+}
+
+//List struct
+type List struct {
+	head *Node
+}
+
+//AddToLinkedList : add item to list
+func AddToLinkedList() {
+
+	list := List{}
+
+	list.Add(1)
+	list.Add(2)
+	list.Add(3)
+	list.Add(4)
+	list.Add(5)
+
+	list.ShowList()
+}
+
+//RemoveFromLinkedList : remove item to list
+func RemoveFromLinkedList() {
+
+	list := List{}
+
+	list.Add(1)
+	list.Add(2)
+	list.Add(3)
+	list.Add(4)
+	list.Add(5)
+
+	list.ShowList()
+
+	list.Remove(2)
+	fmt.Println()
+	list.ShowList()
+}
+
+//FindInLinkedList : find item to list
+func FindInLinkedList() {
+
+	list := List{}
+
+	list.Add(1)
+	list.Add(2)
+	list.Add(3)
+	list.Add(4)
+	list.Add(5)
+
+	list.Find(2)
+	list.Find(20)
+}
+
+//Remove : Remove item to list
+func (l *List) Remove(item interface{}) {
+
+	var node Node
+	node.item = item
+	previous := &Node{}
+	list := l.head
+
+	for list != nil {
+
+		if list.item == item {
+			previous.next = list.next
+		} else {
+			previous = list
+		}
+		list = list.next
+	}
+
+}
+
+//Add : add item to list
+func (l *List) Add(item interface{}) {
+
+	var node Node
+	node.item = item
+
+	if l.head == nil {
+		l.head = &node
+	} else {
+		list := l.head
+		for list.next != nil {
+			list = list.next
+		}
+		list.next = &node
+	}
+
+}
+
+//Find : find item to list
+func (l *List) Find(item interface{}) {
+
+	list := l.head
+
+	for list != nil {
+
+		if list.item == item {
+			fmt.Println("Found")
+			return
+		}
+
+		list = list.next
+	}
+
+	fmt.Println("Not Found")
+}
+
+//ShowList : show all list of item
+func (l *List) ShowList() {
+
+	list := l.head
+
+	for list != nil {
+		fmt.Printf("%+v ->", list.item)
+		list = list.next
+	}
+
+}
