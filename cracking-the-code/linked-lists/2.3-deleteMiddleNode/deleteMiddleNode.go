@@ -5,6 +5,7 @@ import "fmt"
 func main() {
 
 	list := List{}
+
 	list.Add("A")
 	list.Add("B")
 	list.Add("C")
@@ -12,34 +13,27 @@ func main() {
 	list.Add("E")
 	list.Add("F")
 	list.Add("G")
-	list.Add("H")
 
-	list.nthToLast(6)
+	list.DeleteMiddleNode()
+
+	list.ShowList()
 
 }
 
-func (l *List) nthToLast(k int) *Node {
+//DeleteMiddleNode delete the middle node
+func (l *List) DeleteMiddleNode() {
 
-	pointer1 := l.head
-	pointer2 := l.head
+	list := l.head
+	count := l.Len()
+	mid := count / 2
 
-	/*move p1 to k nodes into the list*/
-	for i := 0; i < k; i++ {
-		if pointer1 == nil {
-			return nil
-		}
-		pointer1 = pointer1.next
+	for mid > 1 {
+		list = list.next
+		mid--
 	}
 
-	/* move them at the same pace*/
-	/* when p1 hits the end, p2 will be at the right element */
-	for pointer1 != nil {
-		pointer1 = pointer1.next
-		pointer2 = pointer2.next
-	}
+	list.next = list.next.next
 
-	fmt.Println(pointer1.item)
-	return pointer1
 }
 
 /* HELPER CODE - NOT USED FOR GRADING */
@@ -69,17 +63,25 @@ func (l *List) Add(item interface{}) {
 		}
 		list.next = &node
 	}
-
 }
 
 //ShowList : show all list of item
 func (l *List) ShowList() {
-
 	list := l.head
-
 	for list != nil {
 		fmt.Printf("%+v ->", list.item)
 		list = list.next
 	}
+}
 
+//Len : Length Of List
+func (l *List) Len() int {
+	list := l.head
+	count := 0
+
+	for list != nil {
+		count++
+		list = list.next
+	}
+	return count
 }
