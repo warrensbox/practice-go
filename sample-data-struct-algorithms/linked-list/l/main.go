@@ -13,17 +13,6 @@ func main() {
 
 }
 
-//Node struct
-type Node struct {
-	item interface{}
-	next *Node
-}
-
-//List struct
-type List struct {
-	head *Node
-}
-
 //AddToLinkedList : add item to list
 func AddToLinkedList() {
 
@@ -69,6 +58,18 @@ func FindInLinkedList() {
 
 	list.Find(2)
 	list.Find(20)
+}
+
+/* HELPER CODE -- NOT USED FOR GRADING */
+//Node struct
+type Node struct {
+	item interface{}
+	next *Node
+}
+
+//List struct
+type List struct {
+	head *Node
 }
 
 //Remove : Remove item to list
@@ -137,4 +138,16 @@ func (l *List) ShowList() {
 		list = list.next
 	}
 
+}
+
+//Len : Length Of List
+func (l *List) Len() int {
+	list := l.head
+	count := 0
+
+	for list != nil {
+		count++
+		list = list.next
+	}
+	return count
 }

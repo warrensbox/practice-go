@@ -35,7 +35,7 @@ func (l *List) RemoveDups() {
 
 }
 
-/* HELPER CODE - NOT USED FOR GRADING */
+/* HELPER CODE -- NOT USED FOR GRADING */
 //Node struct
 type Node struct {
 	item interface{}
@@ -45,6 +45,26 @@ type Node struct {
 //List struct
 type List struct {
 	head *Node
+}
+
+//Remove : Remove item to list
+func (l *List) Remove(item interface{}) {
+
+	var node Node
+	node.item = item
+	previous := &Node{}
+	list := l.head
+
+	for list != nil {
+
+		if list.item == item {
+			previous.next = list.next
+		} else {
+			previous = list
+		}
+		list = list.next
+	}
+
 }
 
 //Add : add item to list
@@ -65,6 +85,24 @@ func (l *List) Add(item interface{}) {
 
 }
 
+//Find : find item to list
+func (l *List) Find(item interface{}) {
+
+	list := l.head
+
+	for list != nil {
+
+		if list.item == item {
+			fmt.Println("Found")
+			return
+		}
+
+		list = list.next
+	}
+
+	fmt.Println("Not Found")
+}
+
 //ShowList : show all list of item
 func (l *List) ShowList() {
 
@@ -75,4 +113,16 @@ func (l *List) ShowList() {
 		list = list.next
 	}
 
+}
+
+//Len : Length Of List
+func (l *List) Len() int {
+	list := l.head
+	count := 0
+
+	for list != nil {
+		count++
+		list = list.next
+	}
+	return count
 }
