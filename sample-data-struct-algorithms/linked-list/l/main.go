@@ -9,7 +9,8 @@ func main() {
 	//examples
 	//AddToLinkedList()
 	//RemoveFromLinkedList()
-	FindInLinkedList()
+	//FindInLinkedList()
+	ReverseLinkedList()
 
 }
 
@@ -58,6 +59,39 @@ func FindInLinkedList() {
 
 	list.Find(2)
 	list.Find(20)
+}
+
+func ReverseLinkedList() {
+
+	list := List{}
+
+	list.Add("A")
+	list.Add("B")
+	list.Add("C")
+	list.Add("D")
+	list.Add("E")
+
+	list.ShowList()
+	list.Reverse()
+	list.ShowList()
+
+}
+
+func (l *List) Reverse() {
+
+	current := l.head
+	next := &Node{}
+	prev := &Node{}
+
+	for current != nil {
+		next = current.next
+		current.next = prev
+		prev = current
+		current = next
+	}
+
+	l.head = prev
+
 }
 
 /* HELPER CODE -- NOT USED FOR GRADING */
@@ -137,7 +171,7 @@ func (l *List) ShowList() {
 		fmt.Printf("%+v ->", list.item)
 		list = list.next
 	}
-
+	fmt.Println()
 }
 
 //Len : Length Of List
@@ -151,3 +185,5 @@ func (l *List) Len() int {
 	}
 	return count
 }
+
+///END OF LIBRARY

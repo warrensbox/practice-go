@@ -121,9 +121,10 @@ func (l *List) ShowList() {
 		fmt.Printf("%+v ->", list.item)
 		list = list.next
 	}
+	fmt.Println()
 }
 
-func (l *List) partition(x interface{}) *Node {
+func (l *List) Partition(x interface{}) *Node {
 
 	node := l.head
 	head := &Node{}
@@ -138,11 +139,13 @@ func (l *List) partition(x interface{}) *Node {
 			// 	/* insert node at head */
 			node.next = head
 			head = node
+			//l.ShowList()
 		} else {
 			fmt.Println("more than", node.item)
 			// 	/* insert node at tail */
 			tail.next = node
 			tail = node
+			//l.ShowList()
 		}
 
 		node = next
@@ -151,7 +154,7 @@ func (l *List) partition(x interface{}) *Node {
 	tail.next = nil
 
 	fmt.Println(head)
-	ShowListNumerate(head)
+	//ShowListNumerate(head)
 	return nil
 }
 
@@ -212,7 +215,7 @@ func SumListBackward(list1 *List, list2 *List) {
 	listOne := list1.head
 	list3 := List{}
 	for listOne != nil {
-		fmt.Printf("%+v ->", listOne.item)
+		//fmt.Printf("%+v ->", listOne.item)
 		data := (listOne.item).(int)
 		current := temp1 * 10
 		temp1 = current + data
@@ -223,24 +226,25 @@ func SumListBackward(list1 *List, list2 *List) {
 	temp2 := 0
 	listTwo := list2.head
 	for listTwo != nil {
-		fmt.Printf("%+v ->", listTwo.item)
+		//fmt.Printf("%+v ->", listTwo.item)
 		data := (listTwo.item).(int)
 		current := temp2 * 10
 		temp2 = current + data
 		listTwo = listTwo.next
 	}
 
-	total := reverseNumber(reverseNumber(temp1) + reverseNumber(temp2))
-
+	//total := reverseNumber(reverseNumber(temp1) + reverseNumber(temp2))
+	total := reverseNumber(temp1) + reverseNumber(temp2)
 	fmt.Println("total", total)
 
-	x := total
-	for x > 0 {
-		z := x / 10
-		y := x % 10
-		fmt.Println(y)
+	//x := total
+	for total > 0 {
+
+		y := total % 10
+		//fmt.Println(y)
 		list3.Add(y)
-		x = z
+		//x = z
+		total = total / 10
 	}
 	list3.ShowList()
 
@@ -252,7 +256,7 @@ func reverseNumber(x int) int {
 	for x > 0 {
 		z := x / 10
 		y := x % 10
-		fmt.Println(y)
+		//fmt.Println(y)
 		temp3 = (temp3 * 10) + y
 		x = z
 	}
@@ -289,13 +293,11 @@ func SumListForward(list1 *List, list2 *List) {
 
 	fmt.Println("total", total)
 
-	x := total
-	for x > 0 {
-		z := x / 10
-		y := x % 10
+	for total > 0 {
+		total = total / 10
+		y := total % 10
 		fmt.Println(y)
 		list3.Add(y)
-		x = z
 	}
 	list3.ShowList()
 
@@ -452,28 +454,40 @@ func main() {
 	// list.Add(10)
 	// list.Add(5)
 	// list.Add(3)
+
+	// list.Add(3)
+	// list.Add(5)
+	// list.Add(8)
+	// list.Add(5)
+	// list.Add(10)
+	// list.Add(2)
+	// list.Add(1)
+
+	// list.Partition(5)
+
+	// list.ShowList()
 	//list.nthToLastPointer(3)
 	//list.RemoveDups()
 	//list.deleteMiddleNode()
 	// list.partitionY(5)
 	// list.ShowList()
 
-	// list1 := List{}
-	// list1.Add(7)
-	// list1.Add(1)
-	// list1.Add(6)
-	// //list1.ShowList()
+	list1 := List{}
+	list1.Add(7)
+	list1.Add(1)
+	list1.Add(6)
+	list1.ShowList()
 
 	// fmt.Println()
-	// list2 := List{}
-	// list2.Add(5)
-	// list2.Add(9)
-	// list2.Add(2)
-	// //list2.ShowList()
+	list2 := List{}
+	list2.Add(5)
+	list2.Add(9)
+	list2.Add(2)
+	list2.ShowList()
 	// fmt.Println()
 
 	//SumListForward(&list1, &list2)
-	//SumListBackward(&list1, &list2)
+	SumListBackward(&list1, &list2)
 
 	// list4 := List{}
 	// list4.Add(6)
@@ -489,15 +503,15 @@ func main() {
 
 	// SumListForward(&list4, &list5)
 
-	list6 := List{}
-	list6.Add("a")
-	list6.Add("b")
-	list6.Add("c")
-	list6.Add("c")
-	list6.Add("b")
-	list6.Add("a")
+	//list6 := List{}
+	// list6.Add("a")
+	// list6.Add("b")
+	// list6.Add("c")
+	// list6.Add("c")
+	// list6.Add("b")
+	// list6.Add("a")
 
-	list6.isPalindrome()
+	// list6.isPalindrome()
 
 }
 
