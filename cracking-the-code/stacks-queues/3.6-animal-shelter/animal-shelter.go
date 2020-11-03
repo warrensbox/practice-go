@@ -105,8 +105,8 @@ func (l *List) DequeueAny() {
 
 		vC := reflect.ValueOf(c.Value)
 		vD := reflect.ValueOf(d.Value)
-		timeDog := vC.FieldByName("time")
-		timeCat := vD.FieldByName("time")
+		timeDog := vD.FieldByName("time")
+		timeCat := vC.FieldByName("time")
 
 		if timeDog.Int() > timeCat.Int() {
 			l.DequeueCat()

@@ -47,7 +47,6 @@ func (o *Stack) push(item int) {
 	topOuter := len(o.stack) - 1
 
 	if len(o.stack[topOuter]) == 4 {
-		fmt.Println("its 4")
 		topStack := []int{}
 		topStack = append(topStack, item)
 		o.stack = append(o.stack, topStack)
@@ -67,7 +66,6 @@ func (o *Stack) pop() {
 	o.stack[topOuter] = o.stack[topOuter][:len(o.stack[topOuter])-1]
 
 	if len(o.stack[topOuter]) == 0 {
-		fmt.Println("its zero")
 		o.stack = o.stack[:topOuter]
 	}
 }
