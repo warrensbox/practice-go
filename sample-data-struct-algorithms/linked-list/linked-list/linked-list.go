@@ -10,7 +10,8 @@ func main() {
 	//AddToLinkedList()
 	//RemoveFromLinkedList()
 	//FindInLinkedList()
-	ReverseLinkedList()
+	//ReverseLinkedList()
+	AddToFrontLinkedList()
 
 }
 
@@ -77,6 +78,24 @@ func ReverseLinkedList() {
 
 }
 
+func AddToFrontLinkedList() {
+
+	list := List{}
+
+	list.Add("A")
+	list.Add("B")
+	list.Add("C")
+	list.Add("D")
+	list.Add("E")
+
+	list.ShowList()
+
+	list.Front("Z")
+
+	list.ShowList()
+
+}
+
 func (l *List) Reverse() {
 
 	current := l.head
@@ -84,7 +103,7 @@ func (l *List) Reverse() {
 	prev := &Node{}
 
 	for current != nil {
-		next = current.next
+		next = current.next //like a temporary variable
 		current.next = prev
 		prev = current
 		current = next
@@ -94,7 +113,19 @@ func (l *List) Reverse() {
 
 }
 
-func (l *List) Front() {
+func (l *List) Front(item interface{}) {
+
+	//current := l.head
+	var node Node
+	node.item = item
+	fmt.Println(node)
+	if l.head == nil {
+		fmt.Println("hre")
+		l.head = &node
+	} else {
+		node.next = l.head
+		l.head = &node
+	}
 
 }
 
