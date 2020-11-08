@@ -94,6 +94,10 @@ func (l *List) Reverse() {
 
 }
 
+func (l *List) Front() {
+
+}
+
 /* HELPER CODE -- NOT USED FOR GRADING */
 //Node struct
 type Node struct {
