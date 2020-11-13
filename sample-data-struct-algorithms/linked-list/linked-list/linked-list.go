@@ -11,8 +11,24 @@ func main() {
 	//RemoveFromLinkedList()
 	//FindInLinkedList()
 	//ReverseLinkedList()
-	AddToFrontLinkedList()
+	//AddToFrontLinkedList()
+	DeleteFromFront()
+}
 
+//DeleteFromFront : delete from front of list
+func DeleteFromFront() {
+
+	list := List{}
+
+	list.Add(1)
+	list.Add(2)
+	list.Add(3)
+	list.Add(4)
+	list.Add(5)
+
+	list.DeleteFront()
+
+	list.ShowList()
 }
 
 //AddToLinkedList : add item to list
@@ -120,11 +136,24 @@ func (l *List) Front(item interface{}) {
 	node.item = item
 	fmt.Println(node)
 	if l.head == nil {
-		fmt.Println("hre")
 		l.head = &node
 	} else {
 		node.next = l.head
 		l.head = &node
+	}
+
+}
+
+func (l *List) DeleteFront() {
+
+	if l.head == nil {
+		l.head = nil
+	} else {
+		if l.head.next != nil {
+			l.head = l.head.next
+		} else {
+			l.head = nil
+		}
 	}
 
 }
