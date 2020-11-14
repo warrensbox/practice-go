@@ -55,6 +55,10 @@ func (q *Queue) Dequeue() interface{} {
 	q.head = first.next
 	q.n--
 
+	if q.IsEmpty() {
+		q.tail = nil
+	}
+
 	return item
 }
 
