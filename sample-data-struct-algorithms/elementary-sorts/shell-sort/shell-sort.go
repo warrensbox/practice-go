@@ -20,8 +20,6 @@ func main() {
 
 	n := len(num.arr)
 	h := 1
-	fmt.Println("n", n)
-	fmt.Println("h*", h)
 
 	for h < n/3 {
 		h = 3*h + 1 //4,13,40
