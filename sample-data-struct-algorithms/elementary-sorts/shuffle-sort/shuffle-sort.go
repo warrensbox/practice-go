@@ -26,8 +26,5 @@ func main() {
 }
 
 func (a *Array) exchange(i, min int) {
-
-	temp := a.arr[i]
-	a.arr[i] = a.arr[min]
-	a.arr[min] = temp
+	a.arr[i], a.arr[min] = a.arr[min], a.arr[i]
 }
