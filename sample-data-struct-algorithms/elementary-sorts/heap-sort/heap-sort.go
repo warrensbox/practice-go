@@ -22,15 +22,12 @@ func (a *Array) sort() {
 
 	n := len(a.pq) - 1
 	for k := n / 2; k >= 1; k-- { //heap ordered
-		fmt.Println("k", k)
 		a.sink(k, n)
 	}
 	fmt.Println(a.pq)
 	for n >= 1 {
 		fmt.Println("n", n)
 		a.exchange(1, n)
-		fmt.Println("exchange")
-		fmt.Println(a.pq)
 		n--
 		a.sink(1, n)
 
