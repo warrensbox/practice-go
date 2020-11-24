@@ -26,7 +26,6 @@ func (a *Array) sort() {
 	}
 	fmt.Println(a.pq)
 	for n >= 1 {
-		fmt.Println("n", n)
 		a.exchange(1, n)
 		n--
 		a.sink(1, n)
