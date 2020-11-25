@@ -21,9 +21,7 @@ type Queue []Node
 func main() {
 	bts := Tree{}
 	bts.put('s', 1)
-	fmt.Println("=====")
 	bts.put('e', 5)
-	fmt.Println("=====")
 	bts.put('a', 5)
 	bts.put('x', 3)
 	bts.put('r', 5)
@@ -86,15 +84,6 @@ func (bts *Tree) get(key rune) int {
 	return -1
 }
 
-func compareTo(node, key rune) int {
-	if node > key {
-		return 1
-	} else if node < key {
-		return -1
-	}
-	return 0
-}
-
 func inOrder(node *Node, q *list.List) {
 
 	if node == nil {
@@ -104,6 +93,15 @@ func inOrder(node *Node, q *list.List) {
 	inOrder(node.Left, q)
 	q.PushBack(string(node.Key))
 	inOrder(node.Right, q)
+}
+
+func compareTo(node, key rune) int {
+	if node > key {
+		return 1
+	} else if node < key {
+		return -1
+	}
+	return 0
 }
 
 //ShowList : show all list of item
