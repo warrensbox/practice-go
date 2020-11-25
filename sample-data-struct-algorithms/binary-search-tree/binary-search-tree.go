@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"container/list"
+	"fmt"
+)
 
 //define Node
 type Node struct {
@@ -13,17 +16,32 @@ type Tree struct {
 	root *Node
 }
 
+type Queue []Node
+
 func main() {
 	bts := Tree{}
-	bts.pute('s', 1)
-	bts.pute('e', 5)
-	bts.pute('a', 5)
-	bts.pute('x', 3)
-	bts.ShowAllLeft()
-	//fmt.Println(bts.root.Value)
+	bts.put('s', 1)
+	fmt.Println("=====")
+	bts.put('e', 5)
+	fmt.Println("=====")
+	bts.put('a', 5)
+	bts.put('x', 3)
+	bts.put('r', 5)
+	bts.put('h', 5)
+	bts.put('m', 3)
+	bts.put('c', 5)
+	queue := list.New()
+	inOrder(bts.root, queue)
+
+	// Loop over container list.
+	for temp := queue.Front(); temp != nil; temp = temp.Next() {
+		fmt.Println(temp.Value)
+	}
+	// bts.ShowAllLeft()
+	// bts.ShowAllRight()
 }
 
-func (bts *Tree) pute(key rune, value int) {
+func (bts *Tree) put(key rune, value int) {
 
 	root := bts.root
 
@@ -34,10 +52,7 @@ func (bts *Tree) pute(key rune, value int) {
 //Put : recursion
 func Put(node *Node, key rune, value int) *Node {
 
-	fmt.Println("key", string(key))
-	fmt.Println("val", value)
 	if node == nil {
-		fmt.Println("new node")
 		var newNode Node
 		newNode.Key = key
 		newNode.Value = value
@@ -45,16 +60,13 @@ func Put(node *Node, key rune, value int) *Node {
 	}
 	cmp := compareTo(key, node.Key) // "key" compared to "node's key"
 	if cmp < 0 {
-		fmt.Println("going left")
 		node.Left = Put(node.Left, key, value)
 	} else if cmp > 0 {
-		fmt.Println("going right")
-		node.Right = Put(node.Left, key, value)
+		node.Right = Put(node.Right, key, value)
 	} else if cmp == 0 {
 		node.Value = value
 	}
 
-	fmt.Println("Reached here")
 	return node
 }
 
@@ -83,8 +95,15 @@ func compareTo(node, key rune) int {
 	return 0
 }
 
-func (bts *Tree) inOrder() {
+func inOrder(node *Node, q *list.List) {
 
+	if node == nil {
+		return
+	}
+
+	inOrder(node.Left, q)
+	q.PushBack(string(node.Key))
+	inOrder(node.Right, q)
 }
 
 //ShowList : show all list of item
@@ -94,8 +113,19 @@ func (bts *Tree) ShowAllLeft() {
 
 	for tree != nil {
 		fmt.Printf("%+s ->", string(tree.Key))
-		fmt.Sprint(tree.Key)
 		tree = tree.Left
+	}
+	fmt.Println()
+}
+
+//ShowList : show all list of item
+func (bts *Tree) ShowAllRight() {
+
+	tree := bts.root
+
+	for tree != nil {
+		fmt.Printf("%+s ->", string(tree.Key))
+		tree = tree.Right
 	}
 	fmt.Println()
 }
