@@ -1,8 +1,6 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main() {
 
@@ -26,7 +24,6 @@ func (a *Array) sort(lo, hi int) {
 	for width := 1; width < n; width = width * 2 {
 		fmt.Println("width", width)
 		for lo := 0; lo < n-width; lo = lo + width + width {
-			fmt.Println("lo", lo)
 			a.merge(lo, lo+width-1, Min(lo+width+width-1, n-1))
 		}
 	}

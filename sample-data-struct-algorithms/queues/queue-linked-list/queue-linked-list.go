@@ -31,13 +31,13 @@ func (q *Queue) Enqueue(item interface{}) {
 
 	var newNode Node
 	newNode.item = item
-	oldLast := q.tail
-	q.tail = &newNode
+	oldLast := q.tail //get current tail "X"
+	q.tail = &newNode //set new node to tail
 
 	if q.IsEmpty() {
 		q.head = q.tail
 	} else {
-		oldLast.next = q.tail
+		oldLast.next = q.tail // set "X" to point to the new tail
 	}
 }
 
