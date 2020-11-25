@@ -31,6 +31,12 @@ func main() {
 	queue := list.New()
 	inOrder(bts.root, queue)
 
+	sm := bts.smallest()
+	fmt.Println("smallest", string(sm.Key))
+
+	lg := bts.largest()
+	fmt.Println("largest", string(lg.Key))
+
 	// Loop over container list.
 	for temp := queue.Front(); temp != nil; temp = temp.Next() {
 		fmt.Println(temp.Value)
@@ -102,6 +108,32 @@ func compareTo(node, key rune) int {
 		return -1
 	}
 	return 0
+}
+
+//smallest key
+func (bts *Tree) smallest() *Node {
+
+	current := bts.root
+	sm := &Node{}
+	for current != nil {
+		sm = current
+		current = current.Left
+	}
+
+	return sm
+}
+
+//largest key
+func (bts *Tree) largest() *Node {
+
+	current := bts.root
+	lg := &Node{}
+	for current != nil {
+		lg = current
+		current = current.Right
+	}
+
+	return lg
 }
 
 //ShowList : show all list of item
