@@ -10,6 +10,7 @@ type Node struct {
 	Key         rune
 	Value       int
 	Left, Right *Node
+	Count       int //added later
 }
 
 type Tree struct {
@@ -28,6 +29,18 @@ func main() {
 	bts.put('h', 5)
 	bts.put('m', 3)
 	bts.put('c', 5)
+
+	bts.deleteMin()
+
+	rootsize := bts.size()
+	fmt.Println("rootsize:", rootsize)
+
+	rank := bts.rank('e')
+	fmt.Println("rank:", rank)
+
+	floor := bts.floor('d')
+	fmt.Println("floor", string(floor))
+
 	queue := list.New()
 	inOrder(bts.root, queue)
 
@@ -39,7 +52,7 @@ func main() {
 
 	// Loop over container list.
 	for temp := queue.Front(); temp != nil; temp = temp.Next() {
-		fmt.Println(temp.Value)
+		fmt.Println("Key", temp.Value)
 	}
 	// bts.ShowAllLeft()
 	// bts.ShowAllRight()
@@ -60,6 +73,7 @@ func Put(node *Node, key rune, value int) *Node {
 		var newNode Node
 		newNode.Key = key
 		newNode.Value = value
+		newNode.Count = 1
 		return &newNode
 	}
 	cmp := compareTo(key, node.Key) // "key" compared to "node's key"
@@ -70,7 +84,7 @@ func Put(node *Node, key rune, value int) *Node {
 	} else if cmp == 0 {
 		node.Value = value
 	}
-
+	node.Count = 1 + Size(node.Left) + Size(node.Right)
 	return node
 }
 
@@ -99,6 +113,43 @@ func inOrder(node *Node, q *list.List) {
 	inOrder(node.Left, q)
 	q.PushBack(string(node.Key))
 	inOrder(node.Right, q)
+}
+
+func (bts *Tree) rank(key rune) int {
+	root := bts.root
+	return Rank(root, key)
+}
+
+func Rank(node *Node, key rune) int {
+
+	if node == nil {
+		return 0
+	}
+	cmp := compareTo(key, node.Key)
+	if cmp < 0 {
+		return Rank(node.Left, key)
+	} else if cmp > 0 {
+		return 1 + Size(node.Left) + Rank(node.Right, key)
+	} else if cmp == 0 {
+		return Size(node.Left)
+	}
+
+	return -1
+}
+
+func (bts *Tree) deleteMin() {
+	root := bts.root
+	root = DeleteMin(root)
+}
+
+func DeleteMin(node *Node) *Node {
+
+	if node.Left == nil {
+		return node.Right
+	}
+	node.Left = DeleteMin(node.Left)
+	node.Count = 1 + Size(node.Left) + Size(node.Right)
+	return node
 }
 
 func compareTo(node, key rune) int {
@@ -134,6 +185,47 @@ func (bts *Tree) largest() *Node {
 	}
 
 	return lg
+}
+
+func (bts *Tree) floor(key rune) rune {
+
+	root := bts.root
+	node := Floor(root, key)
+	if node == nil {
+		return rune(0)
+	}
+	return node.Key
+}
+
+func Floor(node *Node, key rune) *Node {
+
+	if node == nil {
+		return nil
+	}
+	cmp := compareTo(key, node.Key)
+	if cmp == 0 {
+		return node
+	}
+	if cmp < 0 {
+		return Floor(node.Left, key)
+	}
+	t := Floor(node.Right, key)
+	if t != nil {
+		return t
+	}
+	return node
+}
+
+func (bts *Tree) size() int {
+	root := bts.root
+	return Size(root)
+}
+
+func Size(node *Node) int {
+	if node == nil {
+		return 0
+	}
+	return node.Count
 }
 
 //ShowList : show all list of item
