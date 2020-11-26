@@ -30,7 +30,7 @@ func main() {
 	bts.put('m', 3)
 	bts.put('c', 5)
 
-	bts.deleteMin()
+	bts.delete('a')
 
 	rootsize := bts.size()
 	fmt.Println("rootsize:", rootsize)
@@ -152,6 +152,38 @@ func DeleteMin(node *Node) *Node {
 	return node
 }
 
+func (bts *Tree) delete(key rune) {
+	root := bts.root
+	root = Delete(root, key)
+}
+
+func Delete(node *Node, key rune) *Node {
+
+	if node == nil {
+		return nil
+	}
+	cmp := compareTo(key, node.Key)
+	if cmp < 0 {
+		node.Left = Delete(node.Left, key) //serching for the key
+	} else if cmp > 0 {
+		node.Right = Delete(node.Right, key) //serching for the key
+	} else {
+		if node.Right == nil { //no right child
+			return node.Left
+		}
+		if node.Left == nil { //no left child
+			return node.Right
+		}
+
+		//replace with succesor
+		t := node
+		node = Smallest(t.Right)
+		node.Left = t.Left
+	}
+	node.Count = Size(node.Left) + Size(node.Right)
+	return node
+}
+
 func compareTo(node, key rune) int {
 	if node > key {
 		return 1
@@ -165,6 +197,18 @@ func compareTo(node, key rune) int {
 func (bts *Tree) smallest() *Node {
 
 	current := bts.root
+	sm := &Node{}
+	for current != nil {
+		sm = current
+		current = current.Left
+	}
+
+	return sm
+}
+
+func Smallest(node *Node) *Node {
+
+	current := node
 	sm := &Node{}
 	for current != nil {
 		sm = current
