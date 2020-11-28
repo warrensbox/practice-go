@@ -59,11 +59,8 @@ func main() {
 }
 
 func (bts *Tree) put(key rune, value int) {
-
 	root := bts.root
-
 	bts.root = Put(root, key, value)
-
 }
 
 //Put : recursion
@@ -175,7 +172,7 @@ func Delete(node *Node, key rune) *Node {
 			return node.Right
 		}
 
-		//replace with succesor
+		//replace with successor
 		t := node
 		node = Smallest(t.Right)
 		node.Left = t.Left
