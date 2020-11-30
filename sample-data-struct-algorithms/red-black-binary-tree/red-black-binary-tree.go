@@ -1,5 +1,12 @@
 package main
 
+/*
+a red–black tree is a kind of self-balancing binary search tree.
+Each node stores an extra bit representing color,
+used to ensure that the tree remains approximately
+balanced during insertions and deletions.
+*/
+
 import "fmt"
 
 const RED = true
