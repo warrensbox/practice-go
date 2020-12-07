@@ -1,7 +1,17 @@
 package main
 
+import "fmt"
+
 func main() {
 
+	bag := New()
+	bag.Insert(1)
+	bag.Insert(2)
+	bag.Do(print)
+}
+
+func print(val interface{}) {
+	fmt.Println(val)
 }
 
 // Bag data structure (multiset).
