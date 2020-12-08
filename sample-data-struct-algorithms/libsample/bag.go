@@ -55,6 +55,12 @@ func (b *Bag) Do(f func(interface{})) {
 	}
 }
 
+// Executes a function for every element in the bag.
+func (b *Bag) Vertices() map[interface{}]int {
+
+	return b.data
+}
+
 // Clears the contents of a bag.
 func (b *Bag) Reset() {
 	b.size = 0

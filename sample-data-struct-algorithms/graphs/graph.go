@@ -8,15 +8,71 @@ import (
 
 func main() {
 
-	bag := libsample.NewBag()
-	bag.Insert(1)
-	bag.Insert(2)
-	bag.Do(print)
+	g := NewGraph(9)
+	g.Connect(0, 1)
+	g.Connect(0, 2)
+	g.Connect(0, 6)
+	g.Connect(6, 4)
+	g.Connect(4, 5)
+	g.Connect(5, 3)
+	g.Connect(3, 4)
+	g.Connect(5, 0)
 
-	bag2 := libsample.NewBag()
-	bag2.Insert(1)
-	bag2.Insert(2)
-	bag2.Do(print)
+	dfs := DepthFirstSearch(g, 0)
+	fmt.Println(dfs.pathTo(3))
+}
+
+//is there a path from s to v
+func (d *DFS) hasPathTo(v int) bool {
+	return d.marked[v]
+}
+
+//path from s to v
+func (d *DFS) pathTo(v int) []int {
+
+	path := []int{}
+	if !d.hasPathTo(v) {
+		return path
+	}
+	x := v //start at end of path
+	for x != d.source {
+		path = append(path, x)
+		x = d.edgeTo[x]
+	}
+
+	return path
+}
+
+//Data structure for dfs
+type DFS struct {
+	marked []bool
+	edgeTo []int
+	source int
+}
+
+//Initialize DS
+func DepthFirstSearch(graph *Graph, source int) *DFS {
+
+	dfs := DFS{make([]bool, graph.NumofVertices()), make([]int, graph.NumofVertices()), source}
+	dfs.depthFirstSearch(graph, source)
+
+	return &dfs
+}
+
+//recursive dfs
+func (d *DFS) depthFirstSearch(g *Graph, vertices int) {
+
+	d.marked[vertices] = true
+	arr_vertices := g.adj(vertices)
+	for adj_vertices := range arr_vertices {
+		w := adj_vertices.(int) //cast
+		if !d.marked[w] {
+			d.depthFirstSearch(g, w)
+			fmt.Println("adding edge", w)
+			d.edgeTo[w] = vertices
+		}
+	}
+
 }
 
 // Data structure for representing a graph.
@@ -45,13 +101,13 @@ func (g *Graph) Connect(v, w int) {
 }
 
 //iterator for vertices adjacent to v
-func (g *Graph) adj(v int) *libsample.Bag {
+func (g *Graph) adj(v int) map[interface{}]int {
 
-	return g.edges[v]
+	return g.edges[v].Vertices()
 }
 
 //return number of vertices in graph
-func (g *Graph) Vertices() int {
+func (g *Graph) NumofVertices() int {
 	return g.nodes
 }
 
