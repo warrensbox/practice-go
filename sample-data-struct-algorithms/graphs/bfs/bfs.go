@@ -30,7 +30,7 @@ type BFS struct {
 	source int
 }
 
-//recursive dfs
+//bfs
 func breadthFirstSearch(g *libsample.Graph, source int) {
 
 	b := BFS{make([]bool, g.NumofVertices()), make([]int, g.NumofVertices()), source}
@@ -46,8 +46,8 @@ func breadthFirstSearch(g *libsample.Graph, source int) {
 
 		fmt.Println(v)
 		arrVertices := g.Adjacent(v) //find all adjacent vertices (cast them as well)
-		for adjVertices := range arrVertices {
-			w := adjVertices.(int) //cast
+		for adjVertice := range arrVertices {
+			w := adjVertice.(int) //cast
 			if !b.marked[w] {
 				queue.PushBack(w)
 				b.marked[w] = true
