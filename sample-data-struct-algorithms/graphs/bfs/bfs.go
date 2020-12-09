@@ -48,7 +48,6 @@ func breadthFirstSearch(g *libsample.Graph, source int) {
 		arrVertices := g.Adjacent(v) //find all adjacent vertices (cast them as well)
 		for adjVertices := range arrVertices {
 			w := adjVertices.(int) //cast
-			fmt.Println("w", w)
 			if !b.marked[w] {
 				queue.PushBack(w)
 				b.marked[w] = true
