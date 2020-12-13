@@ -20,9 +20,6 @@ func NewDigraph(vertices int) *Digraph {
 //connect two vertices (may loopback)
 func (g *Digraph) Connect(v, w int) {
 	g.edges[v].Insert(w)
-	if v != w {
-		g.edges[w].Insert(v)
-	}
 }
 
 //iterator for vertices adjacent to v
