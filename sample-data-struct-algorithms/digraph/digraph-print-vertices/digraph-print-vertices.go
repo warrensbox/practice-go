@@ -15,7 +15,7 @@ func Print(g *libsample.Graph) {
 	for v := 0; v < g.NumofVertices(); v++ {
 		w_adj := g.Adjacent(v)
 		for w := range w_adj {
-			fmt.Printf(%v "->" %v,v,w)
+			fmt.Printf("%->%v", v, w.(int))
 		}
 	}
 }
