@@ -2,7 +2,6 @@ package main
 
 import (
 	"container/list"
-	"fmt"
 
 	"github.com/warrensbox/practice-go/sample-data-struct-algorithms/libsample"
 )
@@ -44,7 +43,6 @@ func breadthFirstSearch(g *libsample.Graph, source int) {
 		queue.Remove(val)
 		v := val.Value.(int) //cast
 
-		fmt.Println(v)
 		arrVertices := g.Adjacent(v) //find all adjacent vertices (cast them as well)
 		for adjVertice := range arrVertices {
 			w := adjVertice.(int) //cast
