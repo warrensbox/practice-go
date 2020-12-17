@@ -32,3 +32,17 @@ func (g *Digraph) Adjacent(v int) map[interface{}]int {
 func (g *Digraph) NumofVertices() int {
 	return g.nodes
 }
+
+// reverse graph
+func (g *Digraph) Reverse() *Digraph {
+
+	dg := NewDigraph(g.NumofVertices())
+	for v := 0; v < dg.NumofVertices(); v++ {
+		arrV := g.Adjacent(v)
+		for adjV := range arrV {
+			w := adjV.(int)
+			dg.Connect(w, v)
+		}
+	}
+	return dg
+}
