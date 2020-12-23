@@ -1,7 +1,5 @@
 package libsample
 
-import "fmt"
-
 type EdgeWeightedGraph struct {
 	nodes int
 	edges []*EdgeBag
@@ -22,17 +20,10 @@ func (ewg *EdgeWeightedGraph) AddEdge(e *Edge) {
 
 	v := e.Either()
 	w := e.Other(v)
-
-	fmt.Println("WW", w)
-
-	fmt.Println("VV", v)
-
 	ewg.edges[v].EdgeInsert(*e)
 	if v != w {
 		ewg.edges[w].EdgeInsert(*e)
 	}
-
-	//fmt.Println(ewg.edges[v])
 }
 
 //iterator for vertices adjacent to v
@@ -62,13 +53,11 @@ func NewEdge(v, w int, weight float32) *Edge {
 
 //either endpoint
 func (e *Edge) Either() int {
-	fmt.Println("v", e.v)
 	return e.v
 }
 
 //other endpoint
 func (e *Edge) Other(vertex int) int {
-	fmt.Println("w", e.w)
 	if vertex == e.v {
 		return e.w
 	}
@@ -89,19 +78,21 @@ func (e *Edge) CompareTo(that Edge) int {
 }
 
 //get all edges of a edge-weighted-graph
-func (ewg *EdgeWeightedGraph) Edges() int {
+func (ewg *EdgeWeightedGraph) Edges() map[Edge]int {
 
-	//bag := NewBag()
+	bag := NewEdgeBag()
 	for v := 0; v < ewg.NumofVertices(); v++ {
 		arrV := ewg.Adjacent(v)
 		for e := range arrV {
-			fmt.Println("---")
-			fmt.Println("yv", v)
-			fmt.Println(e.v)
 			if e.Other(v) > v {
-
+				bag.EdgeInsert(e)
 			}
 		}
 	}
-	return 1
+	return bag.data
+}
+
+//Weight endpoint
+func (e *Edge) Weight() float32 {
+	return e.weight
 }
