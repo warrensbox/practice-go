@@ -59,8 +59,7 @@ func KruskalMST(ewg *libsample.EdgeWeightedGraph) {
 	edges := []libsample.Edge{}
 	mst = list.New()
 
-	edgeArr := ewg.Edges()
-	for e := range edgeArr {
+	for e := range ewg.Edges() {
 		edges = append(edges, e)
 	}
 
@@ -79,7 +78,7 @@ func KruskalMST(ewg *libsample.EdgeWeightedGraph) {
 			continue // if connected, ignore
 		}
 		uf.union(v, w)  //merge components
-		mst.PushBack(e) //edge edge to mst
+		mst.PushBack(e) //push edges to mst
 	}
 
 }

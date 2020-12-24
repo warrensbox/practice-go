@@ -91,9 +91,9 @@ func LazyPrimMST(ewg *libsample.EdgeWeightedGraph) {
 }
 
 func (mst *MST) visit(ewg *libsample.EdgeWeightedGraph, v int) {
+
 	mst.marked[v] = true
-	edgeArr := ewg.Adjacent(v)
-	for e := range edgeArr {
+	for e := range ewg.Adjacent(v) {
 		if !mst.marked[e.Other(v)] {
 			mst.PQInsert(e)
 		}
