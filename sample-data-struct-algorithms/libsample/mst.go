@@ -26,7 +26,7 @@ func (ewg *EdgeWeightedGraph) AddEdge(e *Edge) {
 	}
 }
 
-//iterator for vertices adjacent to v
+//iterator for edges adjacent to v
 func (ewg *EdgeWeightedGraph) Adjacent(v int) map[Edge]int {
 	return ewg.edges[v].EdgeVertices()
 }
@@ -82,8 +82,7 @@ func (ewg *EdgeWeightedGraph) Edges() map[Edge]int {
 
 	bag := NewEdgeBag()
 	for v := 0; v < ewg.NumofVertices(); v++ {
-		arrV := ewg.Adjacent(v)
-		for e := range arrV {
+		for e := range ewg.Adjacent(v) {
 			if e.Other(v) > v {
 				bag.EdgeInsert(e)
 			}

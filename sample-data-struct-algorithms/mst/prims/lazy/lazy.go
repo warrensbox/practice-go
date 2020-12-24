@@ -69,7 +69,7 @@ func LazyPrimMST(ewg *libsample.EdgeWeightedGraph) {
 	mst.marked = make([]bool, ewg.NumofVertices())
 	mst.queue = list.New()
 
-	mst.vist(ewg, 0)
+	mst.visit(ewg, 0)
 	for len(mst.minPQ) > 0 {
 		e := mst.PQPop()
 		v := e.Either()
