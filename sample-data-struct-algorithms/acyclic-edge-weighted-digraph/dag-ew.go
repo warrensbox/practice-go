@@ -55,7 +55,7 @@ func AcyclicSP(g *libsample.EdgeWeightedDiGraph, s int) *DSP {
 	var dsp DSP
 	dsp.distTo = make([]float32, g.NumofVertices())
 	dsp.edgeTo = make([]libsample.DiEdge, g.NumofVertices())
-	dsp.minPQ = make(ByWeight, 0)
+	//dsp.minPQ = make(ByWeight, 0)
 
 	for v := 0; v < g.NumofVertices(); v++ {
 		dsp.distTo[v] = math.MaxFloat32
@@ -91,12 +91,6 @@ func (d *DSP) relax(g *libsample.EdgeWeightedDiGraph, v int) {
 			fmt.Println("PUSH", w)
 			d.distTo[w] = d.distTo[v] + e.Weight()
 			d.edgeTo[w] = e
-			if d.PQContains(w) {
-				d.PQUpdate(w, d.distTo[w])
-			} else {
-				d.PQInsert(w, d.distTo[w])
-			}
-
 		}
 
 	}
