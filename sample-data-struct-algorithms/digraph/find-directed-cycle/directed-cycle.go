@@ -32,8 +32,6 @@ func main() {
 
 }
 
-type Post string
-
 type DFS struct {
 	marked  []bool
 	edgeTo  []int

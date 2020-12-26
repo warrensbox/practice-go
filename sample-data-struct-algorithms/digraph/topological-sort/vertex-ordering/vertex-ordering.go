@@ -27,8 +27,6 @@ func main() {
 	fmt.Println(d.reversePost)
 }
 
-type Post string
-
 type DFS struct {
 	marked      []bool
 	reversePost []int      //reserve post order

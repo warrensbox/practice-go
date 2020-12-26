@@ -1,6 +1,7 @@
 package main
 
 import (
+	"container/list"
 	"fmt"
 	"math"
 	"sort"
@@ -38,8 +39,9 @@ func main() {
 	e = libsample.NewDiEdge(6, 4, 0.93)
 	g.AddEdge(e)
 
-	DijkstraSP(g, 0)
+	dsp := AcyclicSP(g, 0)
 
+	fmt.Println(dsp.pathTo(0))
 }
 
 type DSP struct {
@@ -48,7 +50,7 @@ type DSP struct {
 	minPQ  ByWeight
 }
 
-func DijkstraSP(g *libsample.EdgeWeightedDiGraph, s int) {
+func AcyclicSP(g *libsample.EdgeWeightedDiGraph, s int) *DSP {
 
 	var dsp DSP
 	dsp.distTo = make([]float32, g.NumofVertices())
@@ -58,22 +60,21 @@ func DijkstraSP(g *libsample.EdgeWeightedDiGraph, s int) {
 	for v := 0; v < g.NumofVertices(); v++ {
 		dsp.distTo[v] = math.MaxFloat32
 	}
-	dsp.distTo[s] = 0.0
 
-	dsp.PQInsert(s, 0.0)
-
-	for dsp.minPQ.Len() > 0 {
-		// item := dsp.pq.Pop()
-		vertice := dsp.PQPop()
-		// fmt.Println("pop e", e)
-		// // fmt.Println("L2", dsp.pq.Len())
-		// for edge := range g.Adjacent(e.To()) {
-		// 	fmt.Println("edge", edge)
-		dsp.relax(g, vertice)
-		// }
+	d := TopologicalOrder(g)
+	fmt.Println(d.reversePost)
+	size := len(d.reversePost)
+	dsp.distTo[d.reversePost[size-1]] = 0.0
+	for size > 0 {
+		v := d.reversePost[size-1]
+		d.reversePost = d.reversePost[:size-1]
+		dsp.relax(g, v)
+		size = len(d.reversePost)
 	}
 
 	fmt.Println(dsp.edgeTo)
+
+	return &dsp
 
 }
 
@@ -81,7 +82,13 @@ func (d *DSP) relax(g *libsample.EdgeWeightedDiGraph, v int) {
 
 	for e := range g.Adjacent(v) {
 		w := e.To()
+		fmt.Println("w", w)
+		fmt.Println("v", v)
+		fmt.Println("e.Weight()", e.Weight())
+		fmt.Println("d.distTo[w]", d.distTo[w])
+		fmt.Println("d.distTo[v]", d.distTo[v])
 		if d.distTo[w] > d.distTo[v]+e.Weight() {
+			fmt.Println("PUSH", w)
 			d.distTo[w] = d.distTo[v] + e.Weight()
 			d.edgeTo[w] = e
 			if d.PQContains(w) {
@@ -94,6 +101,22 @@ func (d *DSP) relax(g *libsample.EdgeWeightedDiGraph, v int) {
 
 	}
 
+}
+
+func (d *DSP) hasPathTo(v int) bool {
+	return d.distTo[v] < math.MaxFloat32
+}
+
+func (d *DSP) pathTo(v int) []libsample.DiEdge {
+	stack := []libsample.DiEdge{}
+	if d.hasPathTo(v) {
+
+		for e := d.edgeTo[v]; e.From() != v; e = d.edgeTo[e.From()] {
+			stack = append(stack, e)
+		}
+	}
+
+	return stack
 }
 
 type PriorityQueue struct {
@@ -151,4 +174,44 @@ func (mst *DSP) PQUpdate(v int, weight float32) {
 	}
 
 	sort.Sort(ByWeight(mst.minPQ))
+}
+
+type DFS struct {
+	marked      []bool
+	reversePost []int      //reserve post order
+	pre         *list.List //pre order
+	post        *list.List //post order
+}
+
+func TopologicalOrder(g *libsample.EdgeWeightedDiGraph) *DFS {
+
+	d := DFS{}
+	d.marked = make([]bool, g.NumofVertices())
+	d.pre = list.New()
+	d.post = list.New()
+
+	for v := 0; v < g.NumofVertices(); v++ {
+		if !d.marked[v] {
+			d.dfs(g, v)
+		}
+	}
+
+	return &d
+}
+
+func (d *DFS) dfs(g *libsample.EdgeWeightedDiGraph, v int) {
+
+	d.pre.PushBack(v)
+
+	d.marked[v] = true
+	//arrV := g.Adjacent(v)
+	for adjV := range g.Adjacent(v) {
+		w := adjV.W
+		if !d.marked[w] {
+			d.dfs(g, w)
+
+		}
+	}
+	d.post.PushBack(v)
+	d.reversePost = append(d.reversePost, v)
 }

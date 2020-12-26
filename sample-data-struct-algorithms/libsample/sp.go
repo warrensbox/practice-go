@@ -1,8 +1,8 @@
 package libsample
 
 type EdgeWeightedDiGraph struct {
-	v     int
-	e     int
+	v     int //number of vertices
+	e     int //number of edges
 	edges []*DiEdgeBag
 }
 

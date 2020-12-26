@@ -67,14 +67,8 @@ func DijkstraSP(g *libsample.EdgeWeightedDiGraph, s int) {
 	dsp.PQInsert(s, 0.0)
 
 	for dsp.minPQ.Len() > 0 {
-		// item := dsp.pq.Pop()
 		vertice := dsp.PQPop()
-		// fmt.Println("pop e", e)
-		// // fmt.Println("L2", dsp.pq.Len())
-		// for edge := range g.Adjacent(e.To()) {
-		// 	fmt.Println("edge", edge)
 		dsp.relax(g, vertice)
-		// }
 	}
 
 	fmt.Println(dsp.edgeTo)

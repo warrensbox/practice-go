@@ -5,8 +5,6 @@ type DiEdge struct {
 	V        int
 	W        int
 	Priority float32
-
-	index int // The index of the item in the heap.
 }
 
 func NewDiEdge(v, w int, weight float32) *DiEdge {
@@ -18,12 +16,12 @@ func NewDiEdge(v, w int, weight float32) *DiEdge {
 	return &edge
 }
 
-//either endpoint
+//from endpoint
 func (e *DiEdge) From() int {
 	return e.V
 }
 
-//other endpoint
+//to endpoint
 func (e *DiEdge) To() int {
 	return e.W
 }
