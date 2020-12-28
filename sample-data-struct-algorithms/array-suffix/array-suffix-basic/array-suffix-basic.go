@@ -39,7 +39,7 @@ func lcp(w1, w2 string) int {
 
 	count := 0
 	len := min(w1, w2)
-	for i := 0; i < len-1; i++ {
+	for i := 0; i < len; i++ {
 		if w1[:i+1] == w2[:i+1] {
 			count++
 		}
