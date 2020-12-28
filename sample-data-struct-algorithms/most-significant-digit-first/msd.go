@@ -28,6 +28,8 @@ func main() {
 	fmt.Println(words)
 }
 
+const R = 26
+
 func Sort(words []string) {
 
 	aux := make([]string, len(words))
@@ -40,26 +42,21 @@ func sort(words, aux []string, lo, hi, d int) {
 	if hi <= lo {
 		return
 	}
-	count := make([]int, 26+1)
+	count := make([]int, R+2)
 	for i := lo; i <= hi; i++ {
 		char := charAt(words[i], d)
-		if char != -1 {
-			count[char+1]++
-		}
-
+		count[char+2]++
 	}
 
-	for r := 0; r < 26; r++ {
+	for r := 0; r < R; r++ {
 		count[r+1] += count[r] //compute cummulative
 	}
 
 	for i := lo; i <= hi; i++ {
 		char := charAt(words[i], d)
-		if char != -1 {
-			index := count[char]
-			aux[index] = words[i]
-			count[char]++
-		}
+		index := count[char+1]
+		aux[index] = words[i]
+		count[char+1]++
 	}
 
 	for i := lo; i <= hi; i++ {
