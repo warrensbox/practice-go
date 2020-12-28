@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 func main() {
 
@@ -28,7 +31,8 @@ func main() {
 			char := []rune(words[i][d-1 : d])
 			count[(char[0]-'a')+1]++
 		}
-
+		fmt.Println(count)
+		os.Exit(0)
 		for i := 0; i < 6; i++ {
 			count[i+1] += count[i] //compute cummulative
 		}
