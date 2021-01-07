@@ -3,21 +3,23 @@ package main
 import (
 	"fmt"
 
+	"github.com/warrensbox/practice-go/sample-data-struct-algorithms/common"
 	"github.com/warrensbox/practice-go/sample-data-struct-algorithms/libsample"
 )
 
 func main() {
-
+	re := recognize("ACD")
+	fmt.Println(re)
 }
 
-func recognize(txt string) {
+func recognize(txt string) bool {
 	//Does NFA recognize txt?
 	g := NFA_RE("((A*B|AC)D)")
 	pc := libsample.NewBag() //create new bag
-	dfs := DepthFirstSearch(g.G, 0)
+	dfs := libsample.DirectedDFS(g.G, 0)
 
 	for v := 0; v < g.G.NumofVertices(); v++ {
-		if dfs.marked[v] {
+		if dfs.Marked(v) {
 			pc.Insert(v)
 		}
 	}
@@ -33,42 +35,20 @@ func recognize(txt string) {
 			}
 		}
 		pc = libsample.NewBag() //create new bag
-		dfs = DepthFirstSearch(g.G, sta)
-	}
-
-}
-
-type DFS struct {
-	marked []bool
-	edgeTo []int
-}
-
-func DepthFirstSearch(g *libsample.Digraph, v int) *DFS {
-
-	d := DFS{}
-	d.marked = make([]bool, g.NumofVertices())
-	d.edgeTo = make([]int, g.NumofVertices())
-
-	// for v := 0; v < g.NumofVertices(); v++ {
-	// 	if !d.marked[v] {
-	d.dfs(g, v)
-	// 	}
-	// }
-
-	return &d
-}
-
-func (d *DFS) dfs(g *libsample.Digraph, v int) {
-	d.marked[v] = true
-
-	arrV := g.Adjacent(v)
-	for adjV := range arrV {
-		w := adjV.(int)
-		if !d.marked[w] {
-			d.edgeTo[w] = v
-			d.dfs(g, w)
+		dfs = libsample.DirectedDFS_Iterable(g.G, match)
+		for v := 0; v < g.G.NumofVertices(); v++ {
+			if dfs.Marked(v) {
+				pc.Insert(v)
+			}
 		}
 	}
+	for vertices := range pc.Vertices() {
+		v := vertices.(int)
+		if v == g.m {
+			return true
+		}
+	}
+	return false
 }
 
 type NFA struct {
@@ -81,8 +61,8 @@ func NFA_RE(regex string) *NFA {
 
 	//Create the NFA for the given regular expression
 	n := NFA{}
-	ops := Stack{}       //new stack
-	n.re = []byte(regex) //convert regex to char array
+	ops := common.IntStack{} //new stack
+	n.re = []byte(regex)     //convert regex to char array
 	n.m = len(regex)
 	n.G = libsample.NewDigraph(n.m + 1)
 
@@ -101,64 +81,17 @@ func NFA_RE(regex string) *NFA {
 				lp = or
 			}
 		}
-		if i < n.m && n.re[i+1] == '*' {
-			n.G.Connect(lp, i+1)
-			n.G.Connect(i+1, lp)
+
+		if i < n.m-1 {
+			if n.re[i+1] == '*' {
+				n.G.Connect(lp, i+1)
+				n.G.Connect(i+1, lp)
+			}
 		}
 		if n.re[i] == '(' || n.re[i] == '*' || n.re[i] == ')' {
 			n.G.Connect(i, i+1)
 		}
 	}
 
-	//n.G.Adjacent()
-
-	return n
-}
-
-//stack implementation
-type Stack struct {
-	stack []int
-}
-
-func (s *Stack) Push(item int) {
-
-	s.stack = append(s.stack, item)
-
-}
-
-func (s *Stack) Pop() int {
-
-	//nothing ot return
-	if len(s.stack) == 0 {
-		fmt.Println("Nothing to return")
-		return -1
-	}
-
-	n := len(s.stack) - 1
-	top := s.stack[n]
-	s.stack = s.stack[:n] //pop
-
-	return top
-
-}
-
-func (s *Stack) Peek() int {
-
-	//nothing ot return
-	if len(s.stack) == 0 {
-		fmt.Println("Nothing to return")
-		return -1
-	}
-
-	n := len(s.stack) - 1
-	top := s.stack[n]
-
-	return top
-
-}
-
-func (s *Stack) Len() int {
-
-	return len(s.stack)
-
+	return &n
 }
