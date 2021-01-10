@@ -3,6 +3,8 @@ package main
 import "fmt"
 
 func main() {
+
+	/* mute start
 	// Example - 1
 	str := "GOLANG"
 	runes := []rune(str)
@@ -24,4 +26,15 @@ func main() {
 
 	result2 := make([]int, 3)
 	result2[1] = 4
+	 mute end */
+
+	float1 := "0.13.45"
+	float2 := "0.13.95"
+
+	if float1 > float2 {
+		fmt.Println("1")
+	} else {
+		fmt.Println("2")
+	}
+
 }
