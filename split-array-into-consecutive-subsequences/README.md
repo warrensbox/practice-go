@@ -26,4 +26,5 @@ Example 3:
 
 Input: [1,2,3,4,4,5]
 Output: False
+You cannot form at least 3 consecutive elements
  
