@@ -10,6 +10,12 @@ type Tree struct {
 	root *Node
 }
 
+func main() {
+
+	arr := []int{1, 2, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15}
+	createMinimalBST(arr)
+}
+
 func createMinimalBST(arr []int) *Node {
 
 	return minimalBST(arr, 0, len(arr)-1)
