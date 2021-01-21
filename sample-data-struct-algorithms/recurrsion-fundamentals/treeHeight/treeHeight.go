@@ -1,5 +1,32 @@
 package main
 
+import "fmt"
+
+func main() {
+
+	arr := []int{1, 2, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15}
+	t := createMinimalBST(arr)
+	height := getHeight(t.root)
+	fmt.Println(height)
+}
+
+func getHeight(node *Node) int {
+
+	if node == nil {
+		return -1
+	}
+
+	return Max(getHeight(node.left), getHeight(node.right)) + 1
+}
+
+func Max(x, y int) int {
+	if x > y {
+		return x
+	}
+	return y
+}
+
+/* create tree for testing */
 type Node struct {
 	value int
 	left  *Node
@@ -8,12 +35,6 @@ type Node struct {
 
 type Tree struct {
 	root *Node
-}
-
-func main() {
-
-	arr := []int{1, 2, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15}
-	createMinimalBST(arr)
 }
 
 func createMinimalBST(arr []int) *Tree {
