@@ -5,9 +5,6 @@ import "fmt"
 func main() {
 
 	bin := uint32(0b110111001111)
-	//bin := uint64(0b00000000000)
-	//bin := uint32(0b11111111111)
-	//flipBit(bin)
 	fmt.Println(flipBit(bin))
 
 }
@@ -28,13 +25,13 @@ func flipBit(a uint32) int {
 		} else if (a & 1) == 0 { //Current bit is a 0
 			//update to 0 (if next bit is 0) or currentLength (if next bit is 1)
 			if (a & 2) == 0 { //reset
+				previousLength = 0
 			} else {
 				fmt.Println("going here")
 				previousLength = currentLength
 			}
 			currentLength = 0
 		}
-		//fmt.Printf("maxLength: %d\n", maxLength)
 		maxLength = Max(previousLength+currentLength+1, maxLength)
 		//fmt.Printf("maxLength: %d\n", maxLength)
 		a = a >> 1
