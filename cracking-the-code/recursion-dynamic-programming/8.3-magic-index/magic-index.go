@@ -7,7 +7,8 @@ func main() {
 	//non repeating sorted array
 	unique_sorted := []int{-40, -20, -1, 1, 2, 3, 5, 7, 9, 12, 13}
 	fmt.Println(magicFast(unique_sorted, 0, len(unique_sorted)-1))
-	fmt.Println(magicFast2(unique_sorted, 0, len(unique_sorted)-1))
+	notunique_sorted := []int{-10, -5, 2, 2, 2, 3, 4, 7, 9, 12, 13}
+	fmt.Println(magicFast2(notunique_sorted, 0, len(notunique_sorted)-1))
 }
 
 //using binary type search
@@ -43,18 +44,23 @@ func magicFast2(arr []int, start, end int) int {
 
 	//Search left
 	leftIndex := Min(midIndex-1, midValue)
-	left := magicFast2(arr, start, leftIndex)
 	fmt.Println("leftIndex", leftIndex)
+
+	left := magicFast2(arr, start, leftIndex)
+
 	fmt.Println("left", left)
+	fmt.Println("----")
 	if left >= 0 {
 		return left
 	}
 
+	fmt.Println("going right")
 	//Search right
 	rightIndex := Max(midIndex+1, midValue)
 	right := magicFast2(arr, rightIndex, end)
 	fmt.Println("rightIndex", rightIndex)
 	fmt.Println("right", right)
+	fmt.Println("----")
 	return right
 
 	//fmt.Println("down")
