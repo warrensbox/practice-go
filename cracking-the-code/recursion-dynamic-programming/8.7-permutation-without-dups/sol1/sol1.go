@@ -3,43 +3,39 @@ package main
 import "fmt"
 
 func main() {
-	arr := getPerms("abcd")
-	for _, a := range arr {
-		fmt.Println(a)
+
+	str := "abc"
+	sample := []rune(str)
+	permute(sample, 0, len(sample)-1)
+}
+
+/* Function to print permutations of string
+This function takes three parameters:
+1. String
+2. Starting index of the string
+3. Ending index of the string. */
+func permute(sample []rune, l, r int) {
+
+	fmt.Println("permute")
+	if l == r {
+		fmt.Println(string(sample))
+		return
+	}
+	for i := l; i <= r; i++ {
+		fmt.Println("l++", l)
+		fmt.Println("i++", i)
+		fmt.Println("l", string(sample[l]))
+		fmt.Println("i", string(sample[i]))
+		sample[l], sample[i] = sample[i], sample[l]
+		permute(sample, l+1, r)
+		fmt.Println("swap back")
+		fmt.Println("l--", string(sample[l]))
+		fmt.Println("i--", string(sample[i]))
+		sample[l], sample[i] = sample[i], sample[l]
 	}
 }
 
-func getPerms(str string) []string {
-	fmt.Println("here")
-	if str == "" {
-		fmt.Println("null")
-		return nil
-	}
-
-	permutations := []string{}
-	if len(str) == 0 { //base case
-		permutations = append(permutations, "")
-		return permutations
-	}
-
-	first := str[0] //get first char
-	fmt.Println("first", string(first))
-	remainder := str[1:]
-	fmt.Println("remainder", remainder)
-
-	words := getPerms(remainder)
-	fmt.Println("words", words)
-	for _, word := range words {
-		for j := 0; j < len(word); j++ {
-			s := insertCharAt(word, first, j)
-			permutations = append(permutations, s)
-		}
-	}
-	return permutations
-}
-
-func insertCharAt(word string, c byte, i int) string {
-	start := word[0:i]
-	end := word[i:]
-	return start + string(c) + end
-}
+// /* Function to swap values at two pointers */
+// func swap(strx *byte, y byte) {
+// 	x, y = y, x
+// }
