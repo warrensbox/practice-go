@@ -1,7 +1,6 @@
 package main
 
-//type Color := [5]string{"black", "white", "red", "yellow", "green"}
-
+//https://www.youtube.com/watch?v=Zq4upTEaQyM
 type Color int
 
 func main() {
