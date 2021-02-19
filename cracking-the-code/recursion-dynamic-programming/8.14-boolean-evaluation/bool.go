@@ -40,12 +40,11 @@ func waysToGetTrue(str string, i, j int, isTrue bool) int {
 		rightTrue := waysToGetTrue(str, k+1, j, true)
 		rightFalse := waysToGetTrue(str, k+1, j, false)
 
-		// fmt.Println("ans", ans)
 		fmt.Println("leftTrue", leftTrue)
 		fmt.Println("leftFalse", leftFalse)
 		fmt.Println("rightTrue", rightTrue)
 		fmt.Println("rightFalse", rightFalse)
-		//fmt.Println("str[k]", str[k])
+
 		if str[k] == '^' {
 			if isTrue {
 				fmt.Println("^ true")
