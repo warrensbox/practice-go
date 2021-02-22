@@ -22,15 +22,15 @@ func permute(sample []rune, l, r int) {
 		return
 	}
 	for i := l; i <= r; i++ {
-		fmt.Println("l++", l)
-		fmt.Println("i++", i)
-		fmt.Println("l", string(sample[l]))
-		fmt.Println("i", string(sample[i]))
+		// fmt.Println("l++", l)
+		// fmt.Println("i++", i)
+		// fmt.Println("l", string(sample[l]))
+		// fmt.Println("i", string(sample[i]))
 		sample[l], sample[i] = sample[i], sample[l]
 		permute(sample, l+1, r)
-		fmt.Println("swap back")
-		fmt.Println("l--", string(sample[l]))
-		fmt.Println("i--", string(sample[i]))
+		// fmt.Println("swap back")
+		// fmt.Println("l--", string(sample[l]))
+		// fmt.Println("i--", string(sample[i]))
 		sample[l], sample[i] = sample[i], sample[l]
 	}
 }

@@ -22,8 +22,8 @@ func minProduct(a, b int) int {
 
 func minProductHelper(smaller, bigger int) int {
 
-	fmt.Println(smaller)
-	fmt.Println(bigger)
+	fmt.Println("smaller", smaller)
+	fmt.Println("bigger", bigger)
 	//base case
 	if smaller == 0 {
 		return 0
@@ -34,7 +34,8 @@ func minProductHelper(smaller, bigger int) int {
 	//compute half. if uneven, compute other half. If even, double it
 	s := smaller >> 1
 	fmt.Printf("%08b\n", s)
-	side1 := minProduct(s, bigger)
+	side1 := minProductHelper(s, bigger)
+	fmt.Println("side1min", side1)
 	side2 := side1
 	if smaller%2 == 1 {
 		side2 = minProductHelper(smaller-s, bigger)
