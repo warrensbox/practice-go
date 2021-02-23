@@ -85,7 +85,7 @@ func coinChange(coins []int, remainder int, dp []int) int {
 	} else {
 		dp[remainder] = minimum
 	}
-	fmt.Println()
+
 	fmt.Println("========")
 	fmt.Println("remainder", remainder)
 	fmt.Println("dp[remainder]", dp[remainder])
