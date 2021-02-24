@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 
@@ -24,6 +26,7 @@ func (a *Array) sort(lo, hi int) {
 		return
 	}
 	mid := lo + (hi-lo)/2
+
 	a.sort(lo, mid)
 	a.sort(mid+1, hi)
 	a.merge(lo, mid, hi)
@@ -34,8 +37,6 @@ func (a *Array) merge(lo, mid, hi int) {
 	i := lo
 	j := mid + 1
 
-	fmt.Println("aux", a.aux)
-	fmt.Println("arr", a.arr)
 	for k := lo; k <= hi; k++ { //== because it is not the length of
 		a.aux[k] = a.arr[k]
 	}
@@ -56,7 +57,5 @@ func (a *Array) merge(lo, mid, hi int) {
 		}
 
 	}
-
-	fmt.Println("=====")
 
 }
