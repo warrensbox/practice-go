@@ -46,13 +46,14 @@ func dfs(grid [][]int, row, column int) int {
 		return 0
 	}
 
-	size := 1
-	grid[row][column] = 1
-	for dr := -1; dr <= 1; dr++ {
-		for dc := -1; dc <= 1; dc++ {
-			size += dfs(grid, row+dr, column+dc)
-		}
-	}
+	fmt.Println(grid)
 
-	return size
+	count := 1
+	grid[row][column] = 1
+	count += dfs(grid, row-1, column)
+	count += dfs(grid, row+1, column)
+	count += dfs(grid, row, column-1)
+	count += dfs(grid, row, column+1)
+	return count
+	//return dfs(grid, i-1, j, count) + dfs(grid, i+1, j, count) + dfs(grid, i, j-1, count) + dfs(grid, i, j+1, count)
 }

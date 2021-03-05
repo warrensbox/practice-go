@@ -22,17 +22,6 @@ func threeSum(digits string) []string {
 	return output
 }
 
-// private void combination(String prefix, String digits, int offset, List<String> ret) {
-// 	if (offset >= digits.length()) {
-// 		ret.add(prefix);
-// 		return;
-// 	}
-// 	String letters = KEYS[(digits.charAt(offset) - '0')];
-// 	for (int i = 0; i < letters.length(); i++) {
-// 		combination(prefix + letters.charAt(i), digits, offset + 1, ret);
-// 	}
-// }
-
 func backtrack(prefix string, digit string, offset int, arr []string) {
 
 	if offset >= len(digit) {
@@ -50,15 +39,8 @@ func backtrack(prefix string, digit string, offset int, arr []string) {
 
 	letters := dict[string(digit[offset])]
 
-	fmt.Println("letters", letters)
-	fmt.Println("string(digit[offset]", string(digit[offset]))
-
 	for i := 0; i < len(letters); i++ {
-		fmt.Println(i)
 		letter := string(letters[i])
-		fmt.Println(letter)
-		//fmt.Println(digit)
-		// 		combination(prefix + letters.charAt(i), digits, offset + 1, ret);
 		backtrack(prefix+letter, digit, offset+1, arr)
 	}
 
