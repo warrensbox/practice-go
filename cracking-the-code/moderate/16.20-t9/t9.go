@@ -33,7 +33,7 @@ func letterCombination(digits []int) []string {
 
 func letterCombinationRecursion(result *[]string, digits []int, current string, index int, mapping []string) {
 
-	if index == len(digits) {
+	if index == len(digits) { //purposely go over
 		*result = append(*result, current)
 		return
 	}
