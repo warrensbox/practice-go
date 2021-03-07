@@ -12,33 +12,26 @@ func main() {
 
 func compute(express string) {
 
-	index := 0 //define an index value for traversing expressions
-	// var num1 uint8
-	// var num2 uint8
-	// var res uint8 //calculation results
 	var num1 int
 	var num2 int
 	var res int //calculation results
 	var ch byte
 	var oper byte
-	//oper := 0
 	numStack := Stack{}
 	operStack := Stack{}
 
-	for true {
-		ch = express[index] //Continuous traversal operato
-		//Determine whether or not it is an operator
-		if isOper(ch) {
-			//Determine whether the current symbol stack has a symbol
-			//if !operStack.isEmpty() {
-			//Judging priority if not empty
-			//if priority(ch) <= priority(operStack.Peek().(byte)) {
-			//When the priority is less than the value at the top of the stack, two stack values pop up for calculation.
-			// num1 = numStack.Pop().(int)
-			// num2 = numStack.Pop().(int)
-			// oper = operStack.Pop().(byte)
-			// res = cal(num1, num2, oper)
+	for i := 0; i < len(express); i++ {
+		ch = express[i] //Continuous traversal operation
+		intVar, _ := strconv.Atoi(string(ch))
+		numStack.Push(intVar)
+		i++
+		if i >= len(express) {
+			break
+		}
+		ch = express[i] //Continuous traversal operation
 
+		if isOper(ch) {
+			// if !operStack.isEmpty() {
 			for numStack.Len() >= 2 && operStack.Len() >= 1 {
 				if priority(ch) <= priority(operStack.Peek().(byte)) {
 					num1 = numStack.Pop().(int)
@@ -50,31 +43,10 @@ func compute(express string) {
 					break
 				}
 			}
-
-			//After calculation, the calculated value is put on the stack of numbers.
-			fmt.Println("res", res)
-			//numStack.Push(res)
-			fmt.Println(numStack.stack...)
-			//At the same time, put the operators in the symbol stack.
-			fmt.Println(string(ch))
-			//if priority(ch) <= priority(operStack.Peek().(byte)) {
 			operStack.Push(ch)
-			//}
-			printStack(operStack.stack)
-
-		} else {
-			//fmt.Println("ch", string(ch))
-			intVar, _ := strconv.Atoi(string(ch))
-			numStack.Push(intVar)
-			fmt.Println(numStack.stack...)
-		}
-		index++
-		if index >= len(express) {
-			break
 		}
 	}
 
-	//After scanning, the value of the stack is calculated with the value in the operator.
 	for true {
 		if operStack.isEmpty() {
 			break
@@ -84,16 +56,9 @@ func compute(express string) {
 		oper = operStack.Pop().(byte)
 		res = cal(num1, num2, oper)
 		numStack.Push(res)
+		fmt.Println(numStack.stack...)
 	}
-	fmt.Println(numStack.Pop().(int))
-}
-func printStack(arr []interface{}) {
-	arr2 := []string{}
-	for _, v := range arr {
-		//fmt.Println(string(v.(uint8)))
-		arr2 = append(arr2, string(v.(uint8)))
-	}
-	fmt.Println(arr2)
+
 }
 
 //Determine whether it is an operator
@@ -111,10 +76,8 @@ func isOper(oper byte) bool {
 func priority(oper byte) int {
 	if oper == '*' || oper == '/' {
 		return 2
-	} else if oper == '+' {
+	} else if oper == '-' || oper == '+' {
 		return 1
-	} else if oper == '-' {
-		return 0
 	} else {
 		return -1
 	}
@@ -125,21 +88,15 @@ func cal(num1, num2 int, oper byte) int {
 	var res int
 	switch oper {
 	case '+':
-		fmt.Println("num1+", num1)
-		fmt.Println("num2+", num2)
 		res = num1 + num2
 		break
 	case '-':
-
-		fmt.Printf("%v - %v\n", num2, num1)
 		res = num2 - num1
 		break
 	case '*':
 		res = num1 * num2
 		break
 	case '/':
-		fmt.Println("num1/", num1)
-		fmt.Println("num2/", num2)
 		res = num2 / num1
 	}
 	return res
