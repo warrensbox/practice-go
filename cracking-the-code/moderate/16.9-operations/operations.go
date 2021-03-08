@@ -61,7 +61,7 @@ func multiply(a, b int) int {
 		mul += a // if a is negative (we just keep adding negative values)
 	}
 	fmt.Println(mul)
-	if a < 0 {
+	if b < 0 { //if b was negative, make sure it's negative again
 		return negate(mul)
 	}
 	return mul

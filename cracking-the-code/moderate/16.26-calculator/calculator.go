@@ -103,7 +103,6 @@ func cal(num1, num2 int, oper byte) int {
 }
 
 /***********************************/
-
 type Stack struct {
 	stack []interface{}
 }
@@ -116,44 +115,29 @@ func (s *Stack) isEmpty() bool {
 }
 
 func (s *Stack) Push(item interface{}) {
-
 	s.stack = append(s.stack, item)
-
 }
 
 func (s *Stack) Pop() interface{} {
-
 	//nothing ot return
 	if len(s.stack) == 0 {
-		fmt.Println("Nothing to return")
 		return -1
 	}
-
 	n := len(s.stack) - 1
 	top := s.stack[n]
 	s.stack = s.stack[:n] //pop
-
 	return top
-
 }
 
 func (s *Stack) Peek() interface{} {
-
-	//nothing ot return
 	if len(s.stack) == 0 {
-		fmt.Println("Nothing to return")
 		return -1
 	}
-
 	n := len(s.stack) - 1
 	top := s.stack[n]
-
 	return top
-
 }
 
 func (s *Stack) Len() int {
-
 	return len(s.stack)
-
 }
