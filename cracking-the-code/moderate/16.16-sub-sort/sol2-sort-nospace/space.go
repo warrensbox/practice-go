@@ -11,25 +11,25 @@ func main() {
 }
 
 func sortSub(orig []int) (int, int) {
-	var flag bool
+	//var flag bool
 	min := math.MaxInt16
 	max := math.MinInt16
 
 	for i := 1; i < len(orig)-1; i++ {
 		if orig[i] < orig[i-1] {
-			flag = true
-		}
-		if flag {
+			// 	flag = true
+			// }
+			// if flag {
 			min = Min(min, orig[i])
 		}
 	}
-	flag = false //reset flag
+	//flag = false //reset flag
 	for j := len(orig) - 2; j >= 0; j-- {
 		if orig[j] > orig[j+1] {
 			fmt.Println(orig[j])
-			flag = true
-		}
-		if flag {
+			// 	flag = true
+			// }
+			// if flag {
 			max = Max(max, orig[j])
 		}
 	}

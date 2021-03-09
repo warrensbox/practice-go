@@ -18,7 +18,7 @@ func estimate(guess []int, solution []int) string {
 	freq := make(map[int]int)
 	hit := 0
 	pseudo := 0
-	//compute hits and buil frequency table
+	//compute hits and build frequency table
 	for i := 0; i < len(guess); i++ {
 		if guess[i] == solution[i] {
 			hit++
