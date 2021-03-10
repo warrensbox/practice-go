@@ -41,8 +41,8 @@ func sumSwap(arrA, arrB []int) (int, int) {
 }
 
 func getTarget(sumA, sumB int) int {
-	if (sumA-sumB)%2 == 0 {
-		return Abs((sumA - sumB) / 2)
+	if (sumB-sumA)%2 == 0 {
+		return Abs((sumB - sumA) / 2)
 	}
 	return -1
 }

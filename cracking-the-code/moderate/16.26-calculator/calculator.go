@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-
 	compute("2-6-7*8/2+5")
 }
 
@@ -31,7 +30,6 @@ func compute(express string) {
 		ch = express[i] //Continuous traversal operation
 
 		if isOper(ch) {
-			// if !operStack.isEmpty() {
 			for numStack.Len() >= 2 && operStack.Len() >= 1 {
 				if priority(ch) <= priority(operStack.Peek().(byte)) {
 					num1 = numStack.Pop().(int)
@@ -89,13 +87,10 @@ func cal(num1, num2 int, oper byte) int {
 	switch oper {
 	case '+':
 		res = num1 + num2
-		break
 	case '-':
 		res = num2 - num1
-		break
 	case '*':
 		res = num1 * num2
-		break
 	case '/':
 		res = num2 / num1
 	}

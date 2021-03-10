@@ -32,14 +32,5 @@ func sumPairs(arr []int, sum int) [][]int {
 		}
 	}
 
-	// for _, val := range arr {
-	// 	complement := sum - val
-	// 	if hash[complement] {
-	// 		pair = append(pair, []int{val, complement})
-	// 	} else {
-	// 		hash[val] = true
-	// 	}
-	// }
-
 	return pair
 }
