@@ -16,7 +16,9 @@ func main() {
 	fmt.Println(num.arr)
 	rand.Seed(time.Now().UnixNano())
 	//shuffle to prevent quadratic O(n)
-	rand.Shuffle(len(num.arr), func(i, j int) { num.arr[i], num.arr[j] = num.arr[j], num.arr[i] })
+	rand.Shuffle(len(num.arr), func(i, j int) {
+		num.arr[i], num.arr[j] = num.arr[j], num.arr[i]
+	})
 	num.sort(0, len(num.arr)-1)
 
 	fmt.Println(num.arr)
