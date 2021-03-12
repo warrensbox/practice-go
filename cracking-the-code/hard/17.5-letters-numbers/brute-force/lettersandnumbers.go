@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	arr := []rune{'a', 'A', 'b', '2', 'c', '3', 'd', '4', 'e', 'E', 'g', '6'}
+	arr := []rune{'a', '1', 'b', 'B', 'c', '3', 'a', 'A', 'b', '2', 'c', '3', 'd', '4', 'e', 'E', 'g', '6'}
 	subarr := findLongestSubarray(arr)
 	fmt.Println(string(subarr))
 }
