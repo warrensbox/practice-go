@@ -67,7 +67,7 @@ func extract(delta []int) {
 		}
 	}
 
-	fmt.Println(memory)
+	fmt.Println(memory) //this is the answer
 }
 
 func Abs(a int) int {
