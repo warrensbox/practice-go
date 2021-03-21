@@ -8,14 +8,14 @@ import (
 
 func main() {
 
-	k := 7 //the smallest 3 elements
+	k := 7 //the smallest 7 elements
 	arr := []int{9, 1, 8, 2, 7, 3, 6, 4, 5}
 	rand.Seed(time.Now().UnixNano())
 	rand.Shuffle(len(arr), func(i, j int) { arr[i], arr[j] = arr[j], arr[i] })
 	num := Array{}
 	num.arr = arr
-	m := k
-	num.Sort(0, len(arr)-1, m)
+
+	num.Sort(0, len(arr)-1, k)
 	//fmt.Println(num.arr)
 }
 

@@ -9,7 +9,7 @@ func main() {
 }
 
 func maxMinute2(arr []int) int {
-	//allocate 2 extra slots in the array s we font have to do bounds
+	//allocate 2 extra slots in the array so we dont have to do bounds
 	memo := make([]int, len(arr)+2)
 	memo[len(arr)] = 0
 	memo[len(arr)+1] = 0
