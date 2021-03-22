@@ -1,3 +1,5 @@
+package main
+
 /**
  * Definition for a binary tree node.
  * type TreeNode struct {
@@ -6,6 +8,13 @@
  *     Right *TreeNode
  * }
  */
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
 func distanceK(root *TreeNode, target *TreeNode, K int) []int {
 	if root == nil {
 		return []int{}
@@ -71,4 +80,3 @@ func distanceK(root *TreeNode, target *TreeNode, K int) []int {
 
 	return ans
 }
-

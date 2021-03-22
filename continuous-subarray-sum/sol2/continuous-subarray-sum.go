@@ -7,7 +7,7 @@ import (
 func main() {
 
 	//input := []int{23, 2, 4, 6, 7}
-	input := []int{90, 5, 6, 4, 7}
+	input := []int{1, 5, 8, 4, 19}
 	k := 3
 	output := checkSubarraySum(input, k)
 
@@ -15,29 +15,26 @@ func main() {
 }
 
 func checkSubarraySum(nums []int, k int) bool {
-	if k < 0 {
-		k = -k
-	}
+
 	hash := make(map[int]int)
 	sum := 0
 	hash[0] = -1
-
+	// agg := 0
 	for i := 0; i < len(nums); i++ {
-		var remainder int
 		sum += nums[i]
+		// agg += nums[i]
+		// fmt.Println("agg", agg)
+		if k != 0 {
+			sum = sum % k
+		}
 		fmt.Println("sum", sum)
-		if k == 0 {
-			remainder = sum
+		fmt.Println("hash[sum]", hash)
+		if position, ok := hash[sum]; ok {
+			if i-position >= 2 {
+				return true
+			}
 		} else {
-			remainder = sum % k
-		}
-		if _, ok := hash[remainder]; !ok {
-			hash[remainder] = i
-		}
-		fmt.Println("hash", hash)
-		fmt.Println("=====")
-		if position, ok := hash[remainder]; ok && i-position >= 2 {
-			return true
+			hash[sum] = i
 		}
 	}
 	return false

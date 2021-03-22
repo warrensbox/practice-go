@@ -2,10 +2,6 @@ package main
 
 //https://www.youtube.com/watch?v=ey7DYc9OANo
 
-func main() {
-
-}
-
 /**
  * Definition for a binary tree node.
  * type TreeNode struct {

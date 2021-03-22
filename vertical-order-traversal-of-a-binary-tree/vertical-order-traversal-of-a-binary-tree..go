@@ -1,3 +1,5 @@
+package main
+
 import "fmt"
 
 /**
@@ -8,6 +10,12 @@ import "fmt"
  *     Right *TreeNode
  * }
  */
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
 
 func verticalTraversal(root *TreeNode) [][]int {
 
