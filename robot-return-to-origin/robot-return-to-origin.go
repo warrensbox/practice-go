@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 
-	input := "LURD"
+	input := "LUUD"
 
 	output := judgeCircle(input)
 
@@ -16,16 +16,15 @@ func judgeCircle(moves string) bool {
 
 	horizontal := 0
 	vertical := 0
-	for _, val := range moves {
-		value := string(val)
+	for _, value := range moves {
 
-		if value == "L" {
+		if value == 'L' {
 			horizontal++
-		} else if value == "R" {
+		} else if value == 'R' {
 			horizontal--
-		} else if value == "U" {
+		} else if value == 'U' {
 			vertical++
-		} else if value == "D" {
+		} else if value == 'D' {
 			vertical--
 		}
 

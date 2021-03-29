@@ -7,6 +7,7 @@ func main() {
 	obj := Constructor()
 	fmt.Println(obj)
 	obj.AddWord("hello")
+	//obj.AddWord("hell")
 	output1 := obj.Search("hello")
 
 	fmt.Println(output1)

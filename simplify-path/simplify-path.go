@@ -19,7 +19,8 @@ func simplifyPath(path string) string {
 	directory := strings.Split(path, "/")
 	fmt.Println(len(directory))
 	for _, dir := range directory {
-		fmt.Println("dir", dir)
+		fmt.Println("cd", dir)
+		fmt.Println("stack1", stack)
 		if dir == ".." {
 			if len(stack) > 0 {
 				fmt.Println("pop", dir)
@@ -31,6 +32,7 @@ func simplifyPath(path string) string {
 				stack = push(stack, dir)
 			}
 		}
+		fmt.Println("stack2", stack)
 	}
 
 	res := ""

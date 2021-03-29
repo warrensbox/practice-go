@@ -1,3 +1,5 @@
+package main
+
 func checkRecord(s string) bool {
 	aCount := 0
 	lCount := 0

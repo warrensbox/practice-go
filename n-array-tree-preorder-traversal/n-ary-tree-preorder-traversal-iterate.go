@@ -1,13 +1,13 @@
+package main
+
 //https://www.youtube.com/watch?v=BHB0B1jFKQc&t=138s
 
-
 type Node struct {
-    Val int
-    Children []*Node
+	Val      int
+	Children []*Node
 }
 
-
- //IS THIS BFS?
+//IS THIS BFS?
 func preorder(root *Node) []int {
 
 	res := make([]int, 0)

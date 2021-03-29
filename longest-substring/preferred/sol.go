@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 func main() {
@@ -10,6 +11,10 @@ func main() {
 	subs := slidingWindow("abcabcs")
 
 	fmt.Println(subs)
+
+	MUTE := "unmute"
+	mutedList := strings.Split(MUTE, ",")
+	fmt.Printf("MUTE: %v\n", mutedList)
 }
 
 func slidingWindow(subs string) int {

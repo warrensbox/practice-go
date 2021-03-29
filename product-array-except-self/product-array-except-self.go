@@ -6,9 +6,9 @@ import (
 
 func main() {
 
-	input := []int{4, 5, 8, 2}
+	input := []int{1, 2, 3, 4}
 
-	output := productExceptSelf(input)
+	output := productExceptSelf2(input)
 	fmt.Println("output", output)
 }
 
@@ -25,12 +25,15 @@ func productExceptSelf(nums []int) []int {
 		output[i] = number * left
 	}
 
+	fmt.Println("OUTPUT", output)
+
 	R := 1
 	for i := N - 1; i >= 0; i-- {
 		out := output[i]
 		output[i] = out * R
 		R = R * nums[i]
-
+		fmt.Println("R", R)
+		fmt.Println("output", output)
 	}
 
 	fmt.Println(output)
@@ -54,18 +57,25 @@ func productExceptSelf2(nums []int) []int {
 		// fmt.Println("nums", nums[i-1])
 		// fmt.Println("leftProduct", leftProduct[i-1])
 		number := nums[i-1]
+		fmt.Println("number", number)
 		left := leftProduct[i-1]
+		fmt.Println("left", left)
 		leftProduct[i] = number * left
+		fmt.Println("leftProduct", leftProduct)
 	}
 
+	fmt.Println("------")
 	for i := N - 2; i >= 0; i-- {
-		fmt.Println("i", i)
-		fmt.Println("nums", nums[i+1])
-		fmt.Println("rightProduct", rightProduct[i+1])
+
 		number := nums[i+1]
 		right := rightProduct[i+1]
 		rightProduct[i] = number * right
+		// fmt.Println("nums", nums)
+
+		fmt.Println("rightProduct", rightProduct)
 	}
+
+	fmt.Println("------")
 
 	for i := 0; i < N; i++ {
 		right := rightProduct[i]
