@@ -5,7 +5,7 @@ import "fmt"
 func main() {
 
 	S := "heeellooo"
-	words := []string{"hello", "hi", "helo"}
+	words := []string{"hello"}
 
 	output := expressiveWords(S, words)
 
@@ -23,55 +23,57 @@ func expressiveWords(S string, words []string) int {
 	return res
 }
 
-func isSrretchy(s string, w string) bool {
+func isSrretchy(source string, word string) bool {
 	i := 0
 	j := 0
 
-	fmt.Println("s", s)
-	fmt.Println("w", w)
-	for i < len(s) && j < len(w) {
+	fmt.Println("source", source)
+	fmt.Println("word", word)
+	for i < len(source) && j < len(word) {
 		fmt.Println("----------")
-		c1 := s[i]
-		c2 := w[j]
+		sourceChar := source[i]
+		wordChar := word[j]
 
-		fmt.Println("c1", string(c1))
-		fmt.Println("c2", string(c2))
+		fmt.Println("characterAt Source", string(sourceChar))
+		fmt.Println("characterAt Word", string(wordChar))
 
-		if c1 != c2 {
+		if sourceChar != wordChar {
 			fmt.Println("First false")
 			return false
 		}
 
-		e1 := i
-		e2 := j
+		indexAtSource := i
+		indexAtWord := j
 
-		fmt.Println("e1", e1)
-		fmt.Println("e2", e2)
+		fmt.Println("indexAtSource", indexAtSource)
+		fmt.Println("indexAtWord", indexAtWord)
 
-		for e1 < len(s) && s[e1] == c1 {
-			e1++
+		for indexAtSource < len(source) && source[indexAtSource] == sourceChar {
+			indexAtSource++
 		}
-		for e2 < len(w) && w[e2] == c2 {
-			e2++
+		for indexAtWord < len(word) && word[indexAtWord] == wordChar {
+			indexAtWord++
 		}
 
-		fmt.Println("e1", e1)
-		fmt.Println("e2", e2)
+		fmt.Println("indexAtSource", indexAtSource)
+		fmt.Println("indexAtWord", indexAtWord)
 
-		n1 := e1 - i
-		n2 := e2 - j
+		lenToPointerSource := indexAtSource - i
+		lenToPointerWord := indexAtWord - j
 
-		fmt.Println("n2", n2)
-		fmt.Println("n1", n1)
+		fmt.Println("lenToPointerWord", lenToPointerWord)
+		fmt.Println("lenToPointerSource", lenToPointerSource)
 
-		if n2 > n1 || (n1 < 3 && n1 != n2) {
+		fmt.Println("Check if lenToPointerWord > lenToPointerSource")
+		if lenToPointerWord > lenToPointerSource || (lenToPointerSource < 3 && lenToPointerSource != lenToPointerWord) {
 			fmt.Println("Second false")
 			return false
 		}
 
-		i = e1
-		j = e2
-		if i == len(s) && j == len(w) {
+		i = indexAtSource
+		j = indexAtWord
+		fmt.Println("Check i == len source j == len word")
+		if i == len(source) && j == len(word) {
 			fmt.Println("Third True")
 			return true
 		}

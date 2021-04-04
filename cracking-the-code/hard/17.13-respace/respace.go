@@ -10,7 +10,13 @@ func main() {
 	dictionary["hello"] = true
 	dictionary["there"] = true
 	dictionary["charley"] = true
+	dictionary["cat"] = true
+	dictionary["cats"] = true
+	dictionary["and"] = true
+	dictionary["sand"] = true
+	dictionary["dog"] = true
 	test := split(dictionary, "hellotherecharley", 0)
+	//test := split(dictionary, "catsanddog", 0)
 	fmt.Println(test.parsed)
 
 }
