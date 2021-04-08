@@ -7,18 +7,24 @@
  *     Children []*Node
  * }
  */
+package main
+
+type Node struct {
+	Val      int
+	Children []*Node
+}
 
 func preorder(root *Node) []int {
 
 	res := make([]int, 0)
 
-	recursive(root, &res)
+	iterate(root, &res)
 
 	return res
 
 }
 
-func recursive(root *Node, res *[]int) {
+func iterate(root *Node, res *[]int) {
 
 	if root == nil {
 		return
@@ -27,6 +33,6 @@ func recursive(root *Node, res *[]int) {
 	*res = append(*res, root.Val)
 	for _, val := range root.Children {
 
-		recursive(val, res)
+		iterate(val, res)
 	}
 }

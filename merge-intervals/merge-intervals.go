@@ -38,7 +38,7 @@ func merge(intervals [][]int) [][]int {
 			fmt.Println("------")
 			fmt.Println("intervals[i][1]", intervals[i][1])
 			result[last][1] = max(result[last][1], intervals[i][1])
-			fmt.Println("------")
+			fmt.Println("------", max(result[last][1], intervals[i][1]))
 		} else {
 			result = append(result, intervals[i])
 			last++
