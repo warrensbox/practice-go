@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 )
 
 func main() {
@@ -42,9 +41,12 @@ func findAnagrams(s string, p string) []int {
 		if phash == hash {
 			ans = append(ans, left)
 		}
-		right++
-		fmt.Println("ans", ans)
-		os.Exit(0)
+		right++ //move right
+		if right != lenOfS {
+			hash[s[right]-'a']++
+		}
+		hash[s[left]-'a']--
+		left++
 	}
 
 	return ans

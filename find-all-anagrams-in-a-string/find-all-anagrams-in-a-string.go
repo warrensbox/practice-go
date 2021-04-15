@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 
-	s := "cbacbabacd"
+	s := "cbaebabacd"
 	p := "abc"
 
 	output := findAnagrams(s, p)
@@ -30,10 +30,15 @@ func findAnagrams(s string, p string) []int {
 	totalCountofEachCharInP := 0
 
 	for end < len(s) {
-		char := s[end]
-		charCount[char-'a']++
 
+		char := s[end]
+		fmt.Println("s", string(char))
+		fmt.Println("end", end)
+		fmt.Println("charCount", charCount)
+		charCount[char-'a']++
+		fmt.Println("After charCount", charCount)
 		if charCount[char-'a'] <= 0 { //if char is in p
+
 			totalCountofEachCharInP++
 		}
 		//totalCountofEachCharInP is only modified if char in p is changed
@@ -50,10 +55,11 @@ func findAnagrams(s string, p string) []int {
 
 			charCount[char-'a']--
 			start++
+			fmt.Println("start", start)
 		}
 
 		end++
-
+		fmt.Println()
 	}
 
 	return result
