@@ -30,7 +30,6 @@ func isSrretchy(source string, word string) bool {
 	fmt.Println("source", source)
 	fmt.Println("word", word)
 	for i < len(source) && j < len(word) {
-		fmt.Println("----------")
 		sourceChar := source[i]
 		wordChar := word[j]
 
