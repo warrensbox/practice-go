@@ -15,4 +15,6 @@ func main() {
 
 	// Equals empty string if doesn't exist
 	fmt.Println(os.Getenv("missing"))
+
+	fmt.Println(os.Executable())
 }
