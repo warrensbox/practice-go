@@ -26,12 +26,15 @@ func wordBreaker(str string, wordDict []string) []string {
 
 	for _, word := range wordDict {
 		if strings.HasPrefix(str, word) {
-			sub := str[len(word):]
-			subStrings := wordBreaker(sub, wordDict)
+			fmt.Println("WORD", word)
 
+			sub := str[len(word):]
+			fmt.Println("sub", sub)
+			subStrings := wordBreaker(sub, wordDict)
+			fmt.Println("subString", subStrings)
 			for _, subString := range subStrings {
-				fmt.Println("word", word)
-				fmt.Println("subString", subString)
+				fmt.Println("**word", word)
+				fmt.Println("**subString", subString)
 				results = append(results, word+" "+subString)
 			}
 		}
