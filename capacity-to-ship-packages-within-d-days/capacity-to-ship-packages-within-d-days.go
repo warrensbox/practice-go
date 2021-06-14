@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func main() {
 
@@ -22,8 +25,8 @@ func shipWithinDays(weights []int, D int) int {
 
 	for lo < hi {
 		fmt.Println("-----")
-		fmt.Println(lo)
-		fmt.Println(hi)
+		// fmt.Println(lo)
+		// fmt.Println(hi)
 
 		days := 1
 		load := 0
@@ -36,19 +39,22 @@ func shipWithinDays(weights []int, D int) int {
 			if weights[i]+load > capacity {
 				load = weights[i]
 				days++
-				fmt.Println("days", days)
+				fmt.Println("daysss", days)
 			} else {
 				fmt.Println("w else")
 				load += weights[i]
 				fmt.Println("LOAD", load)
 			}
+			time.Sleep(8 * time.Second)
 		}
 
+		fmt.Println("days", days)
 		if days <= D {
 			hi = capacity
 		} else {
 			lo = capacity + 1
 		}
+		time.Sleep(3 * time.Second)
 	}
 
 	return lo
