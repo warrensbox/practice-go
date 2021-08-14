@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 
-	str := "abc"
+	str := "aacd"
 	sample := []rune(str)
 	permute(sample, 0, len(sample)-1)
 }
@@ -14,24 +14,33 @@ This function takes three parameters:
 1. String
 2. Starting index of the string
 3. Ending index of the string. */
-func permute(sample []rune, l, r int) {
+func permute(sample []rune, left, right int) {
 
-	fmt.Println("permute")
-	if l == r {
+	//fmt.Println("after l", left)
+	if left == right {
 		fmt.Println(string(sample))
 		return
 	}
-	for i := l; i <= r; i++ {
+	hash := make(map[rune]bool)
+	for i := left; i <= right; i++ {
 		// fmt.Println("l++", l)
 		// fmt.Println("i++", i)
 		// fmt.Println("l", string(sample[l]))
-		// fmt.Println("i", string(sample[i]))
-		sample[l], sample[i] = sample[i], sample[l]
-		permute(sample, l+1, r)
+		//fmt.Println("i", i)
+		//fmt.Println("left", left)
+		if hash[sample[i]] {
+			continue
+		} else {
+			hash[sample[i]] = true
+		}
+		sample[left], sample[i] = sample[i], sample[left]
+		//fmt.Println("sample B4", string(sample))
+		permute(sample, left+1, right)
 		// fmt.Println("swap back")
 		// fmt.Println("l--", string(sample[l]))
 		// fmt.Println("i--", string(sample[i]))
-		sample[l], sample[i] = sample[i], sample[l]
+		sample[left], sample[i] = sample[i], sample[left]
+		//fmt.Println("sample FtR", string(sample))
 	}
 }
 

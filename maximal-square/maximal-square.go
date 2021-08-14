@@ -6,10 +6,10 @@ import (
 
 func main() {
 
-	input := [][]byte{{'1', '0', '1', '0', '0'},
-		{'1', '0', '1', '1', '1'},
-		{'1', '1', '1', '1', '1'},
-		{'1', '0', '0', '1', '0'}}
+	input := [][]byte{  {'1', '0', '1', '0', '0'},
+						{'1', '0', '1', '1', '1'},
+						{'1', '1', '1', '1', '1'},
+						{'1', '0', '0', '1', '0'}}
 
 	//fmt.Println(input[3][4])
 
@@ -36,19 +36,27 @@ func maximalSquare(matrix [][]byte) int {
 		for j := 0; j < col; j++ {
 
 			if i == 0 || j == 0 || matrix[i][j] == '0' {
+
 				cache[i][j] = int(matrix[i][j] - '0')
 			} else {
 				min := min(cache[i][j-1], min(cache[i-1][j], cache[i-1][j-1]))
 				cache[i][j] = min + 1
 			}
-			fmt.Print(cache[i][j])
+			// fmt.Print(cache[i][j])
 
 			if cache[i][j] > max {
 				max = cache[i][j]
 			}
 
+			for i := 0; i < row; i++ {
+				for j := 0; j < col; j++ {
+					fmt.Print(cache[i][j])
+				}
+				fmt.Println()
+			}
+			fmt.Println("-----------")
 		}
-		fmt.Println()
+		fmt.Println("-----------")
 	}
 
 	return max * max

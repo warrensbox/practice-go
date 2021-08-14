@@ -25,14 +25,22 @@ func recursion(data string, k int) int {
 	}
 
 	s := len(data) - k
+	fmt.Println("k", k)
+	fmt.Println("s", s)
 	if data[s] == '0' {
 		return 0
 	}
 
 	result := recursion(data, k-1)
-	digit, _ := strconv.Atoi(data[s : s+2])
-	if k >= 2 && digit <= 26 {
-		result += recursion(data, k-2)
+	fmt.Println("====")
+	fmt.Println("k", k)
+	fmt.Println("s", s)
+	fmt.Println("====")
+	if s <= len(data)-2 {
+		digit, _ := strconv.Atoi(data[s : s+2])
+		if k >= 2 && digit <= 26 {
+			result += recursion(data, k-2)
+		}
 	}
 
 	return result
