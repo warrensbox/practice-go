@@ -9,9 +9,10 @@ import (
 
 func main() {
 
-	input := []int{-1, 0, 1, 2, -1, -4}
+	input := []int{-5, -4, -4, -3, -3, -2, -1, -1, 0, 1, 2, 2, 3, 4, 4, 5, 6}
 
-	output := threeSum(input)
+	//output := threeSum(input)
+	output := sumOfTwo(input, 1, 0, len(input)-1)
 	fmt.Println(output)
 }
 
@@ -92,33 +93,35 @@ func threeSum(nums []int) [][]int {
 
 }
 
-// func sumOfTwo(nums []int, target int, left int, right int) []int {
+func sumOfTwo(nums []int, target int, left int, right int) [][]int {
+	var res [][]int
+	for left < right {
 
-// 	for left < right {
+		var sub []int
+		if nums[left]+nums[right] == target {
+			fmt.Println(nums[left])
+			sub = append(sub, nums[left])
+			sub = append(sub, nums[right])
 
-// 		if nums[left]+nums[right] == 0 {
-// 			var res []int
+			left++
+			right--
 
-// 			res = append(res,target)
-// 			res = append(res,nums[left])
-// 			res = append(res,nums[right])
+			for left < right && nums[left] == nums[left-1] {
+				left++
+			}
+			for left < right && nums[right] == nums[right+1] {
+				right++
+			}
+		} else if nums[left]+nums[right] > target {
+			right--
+		} else if nums[left]+nums[right] < target {
+			left++
+		}
+		if len(sub) > 0 {
+			res = append(res, sub)
 
-// 			left++
-// 			right--
+		}
+	}
 
-// 			for left < right && nums[left]==nums[left-1]{
-// 				left++
-// 			}
-// 			for left <right && nums[right]==nums[right+1]{
-// 				right++
-// 			}
-// 		}else if nums[left]+nums[right]>target{
-// 			right--
-// 		}else if nums[left]+nums[right]<target{
-// 			left++
-// 		}
-
-// 	}
-
-// 	return res
-// }
+	return res
+}

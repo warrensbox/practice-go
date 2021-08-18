@@ -26,17 +26,22 @@ func leastCoins(coins []int, amount int) int {
 	*/
 	dp[0] = 0
 
-	fmt.Println(dp)
-
 	// Solve every subproblem from 1 to amount
 	for i := 1; i <= amount; i++ {
 		// For each coin we are given
+		fmt.Println("i", i)
 		for j := 0; j < len(coins); j++ {
+			fmt.Println("j", j)
+			fmt.Println("coins[j]", coins[j])
 			// If it is less than or equal to the sub problem amount
 			if coins[j] <= i {
 				// Try it. See if it gives us a more optimal solution
+				fmt.Println("dp[i]", dp[i])
+				fmt.Println("i-coins[j]", i-coins[j])
 				dp[i] = Min(dp[i], dp[i-coins[j]]+1)
 			}
+			fmt.Println(dp)
+			fmt.Println("------")
 		}
 	}
 
