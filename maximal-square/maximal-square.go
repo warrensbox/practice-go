@@ -6,10 +6,10 @@ import (
 
 func main() {
 
-	input := [][]byte{  {'1', '0', '1', '0', '0'},
-						{'1', '0', '1', '1', '1'},
-						{'1', '1', '1', '1', '1'},
-						{'1', '0', '0', '1', '0'}}
+	input := [][]byte{{'1', '0', '1', '0', '0'},
+		{'1', '0', '1', '1', '1'},
+		{'1', '1', '1', '1', '1'},
+		{'1', '0', '0', '1', '0'}}
 
 	//fmt.Println(input[3][4])
 
@@ -48,13 +48,13 @@ func maximalSquare(matrix [][]byte) int {
 				max = cache[i][j]
 			}
 
-			for i := 0; i < row; i++ {
-				for j := 0; j < col; j++ {
-					fmt.Print(cache[i][j])
-				}
-				fmt.Println()
-			}
-			fmt.Println("-----------")
+			// for i := 0; i < row; i++ {
+			// 	for j := 0; j < col; j++ {
+			// 		fmt.Print(cache[i][j])
+			// 	}
+			// 	fmt.Println()
+			// }
+			// fmt.Println("-----------")
 		}
 		fmt.Println("-----------")
 	}

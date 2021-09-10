@@ -1,5 +1,5 @@
 // To execute Go code, please declare a func main() in a package "main"
-
+//TESTCODE
 package main
 
 import (
@@ -8,49 +8,47 @@ import (
 
 func main() {
 
-	p1 := []int{0, 0}
-	p2 := []int{1, 1}
-	p3 := []int{1, 0}
-	p4 := []int{0, 1}
-	fmt.Println(validSquare(p1, p2, p3, p4))
+	fmt.Println(getMoneyAmount(2))
 }
 
 /*
 goal: decode string according to num[char]
 */
+func getMoneyAmount(n int) int {
+	dp := make([][]int, n+1)
+	for i := 0; i <= n; i++ {
+		dp[i] = make([]int, n+1)
+		for j := 0; j <= n; j++ {
+			dp[i][j] = 100000
+		}
+		dp[i][i] = 0
+	}
 
-type Points struct {
-	x int
-	y int
-}
-
-func validSquare(p1 []int, p2 []int, p3 []int, p4 []int) bool {
-
-	hash := make(map[int]bool, 2)
-	pp := make(map[[2]int]bool, 4)
-
-	p := [][]int{p1, p2, p3, p4}
-
-	for i, v := range p {
-		//fmt.Println(i)
-		fmt.Println("v", v)
-		pp[[2]int{v[0], v[1]}] = true
-		//fmt.Println("pp", pp)
-		for j := i + 1; j < len(p); j++ {
-			pp[[2]int{v[0], v[1]}] = true
-			//fmt.Println("pp2", pp)
-			fmt.Println("p[j][0]", p[j][0])
-			fmt.Println("v[0]", v[0])
-			dist := (p[j][0]-v[0])*(p[j][0]-v[0]) + (p[j][1]-v[1])*(p[j][1]-v[1])
-			fmt.Println("dist", dist)
-			hash[dist] = true
-
-			fmt.Println(hash)
-			if len(hash) > 2 {
-				return false
+	fmt.Println(dp)
+	fmt.Println("-----")
+	for i := 1; i < n; i++ {
+		for j := 1; j+i <= n; j++ {
+			dp[j][j+i] = min(j+dp[j+1][j+i], dp[j][j+i-1]+j+i)
+			fmt.Println(dp)
+			for k := j + 1; k < j+i; k++ {
+				dp[j][j+i] = min(dp[j][j+i],
+					k+max(dp[j][k-1], dp[k+1][j+i]))
 			}
 		}
 	}
+	return dp[1][n]
+}
 
-	return true
+func max(a int, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func min(a int, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }
