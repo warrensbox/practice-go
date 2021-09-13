@@ -1,12 +1,6 @@
 package main
 
-import (
-	"fmt"
-)
-
-func main() {
-
-}
+import "fmt"
 
 func longestLine(mat [][]int) int {
 
