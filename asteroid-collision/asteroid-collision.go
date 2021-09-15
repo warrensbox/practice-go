@@ -29,7 +29,7 @@ func asteroidCollision(asteroids []int) []int {
 	fmt.Println(rstack)
 
 	for !lstack.empty() {
-		top := lstack.top()
+		top := lstack.top() //also pop
 		fmt.Println("top", top)
 		//continue
 		if top > 0 {
@@ -46,7 +46,7 @@ func asteroidCollision(asteroids []int) []int {
 		} else {
 			if !lstack.empty() && lstack.peek() > 0 {
 				//fmt.Println(lstack.peek())
-				topInner := lstack.top()
+				topInner := lstack.top() //also pops
 				if topInner < -top {
 					lstack.push(top)
 				} else if topInner > -top {
