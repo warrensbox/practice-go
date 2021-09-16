@@ -1,6 +1,17 @@
 package main
 
-import "sort"
+import (
+	"fmt"
+	"sort"
+)
+
+func main() {
+
+	target := 12
+	position := []int{10, 8, 0, 5, 3}
+	speed := []int{2, 4, 1, 1, 3}
+	fmt.Println(carFleet(target, position, speed))
+}
 
 func carFleet(target int, position []int, speed []int) int {
 
@@ -17,13 +28,15 @@ func carFleet(target int, position []int, speed []int) int {
 
 	//fmt.Println(allcar)
 	sort.Sort(Allcar(allcar))
-	// fmt.Println(allcar)
+
+	fmt.Println(allcar)
 	curr := 0.0
 	fleet := 0
 	//for i:= len(allcar)-1; i >=0; i--{
 	for i := 0; i < len(allcar); i++ {
-		// fmt.Println(allcar[i].Time)
+		fmt.Println(allcar[i].Time)
 		if allcar[i].Time > curr {
+			fmt.Println("fleet", fleet)
 			fleet++
 			curr = allcar[i].Time
 		}
