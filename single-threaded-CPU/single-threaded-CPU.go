@@ -2,21 +2,18 @@ package main
 
 import (
 	"container/heap"
+	"fmt"
 	"sort"
 )
 
+func main() {
+
+	task := [][]int{{1, 2}, {2, 4}, {3, 2}, {4, 1}}
+	fmt.Println(getOrder(task))
+}
+
 func getOrder(tasks [][]int) []int {
 
-	//var res []int
-	//var process Process
-	//process := make(Process,len(tasks))
-	// for i, task := range tasks {
-	//     var node Task
-	//     node.Index = i
-	//     node.Enqueue = task[0]
-	//     node.Processing = task[1]
-	//     process = append(process,node)
-	// }
 	cpuTasks := make([]Task, len(tasks))
 
 	for i, task := range tasks {
@@ -27,17 +24,10 @@ func getOrder(tasks [][]int) []int {
 		cpuTasks[i] = node
 	}
 
-	//fmt.Println(process)
-	//sort.Sort(SortTask(cpuTasks))
-	//sort.SliceStable(cpuTasks, func(i, j int) bool { return cpuTasks[i].Enqueue < cpuTasks[j].Enqueue })
 	sort.Slice(cpuTasks, func(a, b int) bool {
 		return cpuTasks[a].Enqueue < cpuTasks[b].Enqueue
 	})
-	//fmt.Println(cpuTasks)
-	// sort.SliceStable(tasks, func(i, j int) bool { return tasks[i][0] < tasks[j][0] })
-	//fmt.Println(tasks)
-
-	//var stack Process
+	fmt.Println("cpuTasks", cpuTasks)
 	time := 0
 	i := 0
 	numProcessed := 0
@@ -47,26 +37,27 @@ func getOrder(tasks [][]int) []int {
 
 		if tasksPQueue.Len() == 0 && i < len(cpuTasks) && cpuTasks[i].Enqueue > time {
 			time = cpuTasks[i].Enqueue
-			//continue
 		}
-
+		fmt.Println("time top", time)
+		fmt.Println("cpuTasks[i].Enqueue", cpuTasks[i].Enqueue)
 		for i < len(cpuTasks) && time >= cpuTasks[i].Enqueue {
-
-			//stack = append(stack,cpuTasks[i])
+			fmt.Println("i", i)
+			fmt.Println("cpuTasks[i].Enqueue", cpuTasks[i].Enqueue)
 			heap.Push(&tasksPQueue, cpuTasks[i])
 			i++
 		}
-		//fmt.Println("stack",stack)
-		//sort.Sort(Process(stack))
+
 		if tasksPQueue.Len() > 0 {
+			fmt.Println("entering if condition")
 			task := heap.Pop(&tasksPQueue).(Task)
-			//top := stack[len(stack)-1]
-			//stack = stack[:len(stack)-1]
 			time = time + task.Processing
-			//res = append(res,top.Index)
+			fmt.Println("task", task)
+			fmt.Println("time", time)
 			result[numProcessed] = task.Index
 			numProcessed++
 		}
+		fmt.Println("---")
+		fmt.Println()
 	}
 
 	return result
@@ -103,22 +94,6 @@ func (c CpuTaskPQueue) Less(a, b int) bool {
 func (c CpuTaskPQueue) Swap(a, b int) {
 	c[a], c[b] = c[b], c[a]
 }
-
-// type Process []Task
-// type SortTask []Task
-
-// func (this Process) Less(i, j int) bool {
-//     if this[i].Processing == this[j].Processing {
-//         return this[i].Index > this[j].Index
-//     }
-//     return this[i].Processing > this[j].Processing
-// }
-// func (this Process) Len() int { return len(this)}
-// func (this Process) Swap(i, j int) { this[i],this[j] = this[j],this[i] }
-
-// func (this SortTask) Less(i, j int) bool { return this[i].Enqueue < this[j].Enqueue }
-// func (this SortTask) Len() int { return len(this)}
-// func (this SortTask) Swap(i, j int) { this[i],this[j] = this[j],this[i] }
 
 type Task struct {
 	Enqueue    int
