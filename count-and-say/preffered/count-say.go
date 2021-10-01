@@ -59,7 +59,7 @@ func CountAndSayRecursion(n int, finalString string) string {
 		characterPointer = countPointer
 	}
 
-	finalString = CountAndSayRecursion(n-1, stringInProgress)
+	//finalString = CountAndSayRecursion(n-1, stringInProgress)
 
-	return finalString
+	return CountAndSayRecursion(n-1, stringInProgress)
 }
