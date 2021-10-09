@@ -18,7 +18,6 @@ dp[i][j] = dp[i-1][k]+point[i][j]-k+j
 */
 
 func main() {
-
 	points := [][]int{{1, 2, 3}, {1, 5, 1}, {3, 1, 1}}
 	maxPoints(points)
 }
@@ -77,6 +76,9 @@ func maxPoints(points [][]int) int64 {
 		fmt.Println("-*****-")
 		fmt.Println("right_dp", right_dp)
 		fmt.Println()
+		fmt.Println("left_dp", left_dp)
+		fmt.Println("right_dp", right_dp)
+
 		for j := 0; j < len(points[i]); j++ {
 			fmt.Println("-***55555**-")
 			fmt.Println("left_dp[j]-j", left_dp[j]-j)
@@ -89,6 +91,7 @@ func maxPoints(points [][]int) int64 {
 		fmt.Println("#############")
 		fmt.Println(dp)
 		fmt.Println("#############")
+		fmt.Println(dp)
 	}
 
 	fmt.Println("************")

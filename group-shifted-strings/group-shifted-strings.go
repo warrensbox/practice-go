@@ -5,6 +5,13 @@ import (
 	"fmt"
 )
 
+func main() {
+
+	//input := []string{"abc","bcd","acef","xyz","az","ba","a","z"}
+	input := []string{"az", "ba"}
+	fmt.Println(groupStrings(input))
+}
+
 func groupStrings(strings []string) [][]string {
 
 	var res [][]string
@@ -40,7 +47,7 @@ func shift(s string, count byte) string {
 	fmt.Println("count", count)
 	var sb bytes.Buffer
 	for i := 0; i < len(s); i++ {
-		fmt.Println("tet", s[i]-'a'+26-count)
+		//fmt.Println("tet", s[i]-'a'+26-count)
 		ch := byte((s[i]-'a'+26-count)%26 + 'a')
 		sb.WriteByte(ch)
 	}
