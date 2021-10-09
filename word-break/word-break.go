@@ -53,7 +53,7 @@ func wordBreak(str string, wordDict []string) bool {
 				fmt.Println("breakable[i]", breakable[i])
 				break
 			}
-			fmt.Println("")
+			fmt.Println("6666")
 		}
 		fmt.Println("=========")
 	}
