@@ -26,14 +26,18 @@ func numDecodings(s string) int {
 
 	memo[n] = 1
 
-	ints := []rune(s)[n-1]
+	fmt.Println(memo)
+	fmt.Println("s", s)
 
+	ints := []rune(s)[n-1]
+	fmt.Println("ints", ints)
+	fmt.Println("n", n)
 	if ints != '0' {
 		memo[n-1] = 1
 	} else {
 		memo[n-1] = 0
 	}
-
+	fmt.Println("memo2", memo)
 	for i := n - 2; i >= 0; i-- {
 		intd := []rune(s)[i]
 		if intd == '0' {
