@@ -1,24 +1,25 @@
 package main
 
-import (
-	"fmt"
-	"math"
-)
+import "fmt"
+
+/*
+goal: check if bst is valid
+sol:
+- left leaf has to be less than parent
+- right leaf has to be more than parent
+- use dfs to check above condition
+O(n) time and O(n)O(n) space.
+SEE OTHER BETTER EXAMPLE
+*/
 
 func main() {
 
-	root := &TreeNode{1, nil, nil}
+	root := &TreeNode{5, nil, nil}
 	obj := Constructor(root)
-	obj.Insert(2)
-	obj.Insert(3)
 	obj.Insert(4)
-	obj.Insert(5)
-	obj.Insert(6)
 	obj.Insert(7)
-
 	param_2 := obj.Get_root()
-	fmt.Println(param_2)
-
+	fmt.Println(valid(param_2))
 }
 
 type TreeNode struct {
@@ -27,46 +28,24 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-func balanced(root *TreeNode) bool {
+func valid(root *TreeNode) bool {
+
+	return validBst(root, 0, 10000)
+}
+
+func validBst(root *TreeNode, min, max int) bool {
+	// fmt.Println("root.Val", root.Val)
+	// fmt.Println("min", min)
+	// fmt.Println("max", max)
+	// fmt.Println("******")
 
 	if root == nil {
 		return true
+	} else if root.Val <= min || root.Val >= max {
+		return false
 	}
 
-	isBalanced := bfs(root)
-
-	return isBalanced
-
-}
-
-func bfs(root *TreeNode) bool {
-
-	queue := []*TreeNode{}
-	queue = append(queue, root)
-	depth := 0
-	nodesCount := 0
-	for len(queue) > 0 {
-		size := len(queue)
-		for i := 0; i < size; i++ {
-			node := (queue)[0]
-			queue = (queue)[1:]
-			nodesCount++
-			if node.Left != nil {
-				queue = append(queue, node.Left)
-			}
-			if node.Right != nil {
-				queue = append(queue, node.Right)
-			}
-		}
-		depth++
-	}
-
-	numNodes := math.Pow(2, float64(depth)) - 1
-	if numNodes == float64(nodesCount) {
-		return true
-	}
-	return false
-
+	return validBst(root.Left, min, root.Val) && validBst(root.Right, root.Val, max)
 }
 
 /*  BINARY TREE INSERTER */
