@@ -2,25 +2,65 @@ package main
 
 import (
 	"fmt"
+	"math"
 )
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
-type CBTInserter struct {
-	root  *TreeNode
-	queue []*TreeNode
+func main() {
+
 }
 
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
 	Right *TreeNode
+}
+
+func balanced(root *TreeNode) bool {
+
+	if root == nil {
+		return true
+	}
+
+	isBalanced := bfs(root)
+
+	return isBalanced
+
+}
+
+func bfs(root *TreeNode) bool {
+
+	queue := []*TreeNode{}
+	queue = append(queue, root)
+	depth := 0
+	nodesCount := 0
+	for len(queue) > 0 {
+		size := len(queue)
+		for i := 0; i < size; i++ {
+			node := (queue)[0]
+			queue = (queue)[1:]
+			nodesCount++
+			if node.Left != nil {
+				queue = append(queue, node.Left)
+			}
+			if node.Right != nil {
+				queue = append(queue, node.Right)
+			}
+		}
+		depth++
+	}
+
+	numNodes := math.Pow(2, float64(depth)) - 1
+	if numNodes == float64(nodesCount) {
+		return true
+	}
+	return false
+
+}
+
+/*  BINARY TREE INSERTER */
+type CBTInserter struct {
+	root  *TreeNode
+	queue []*TreeNode
 }
 
 func Constructor(root *TreeNode) CBTInserter {
@@ -72,33 +112,4 @@ func (this *CBTInserter) Insert(val int) int {
 
 func (this *CBTInserter) Get_root() *TreeNode {
 	return this.root
-}
-
-/**
- * Your CBTInserter object will be instantiated and called as such:
- * obj := Constructor(root);
- * param_1 := obj.Insert(val);
- * param_2 := obj.Get_root();
- */
-
-func main() {
-	root := &TreeNode{1, nil, nil}
-	obj := Constructor(root)
-	param_1 := obj.Insert(2)
-	fmt.Println("param_1", param_1)
-
-	param_1 = obj.Insert(3)
-	fmt.Println("param_1", param_1)
-	param_1 = obj.Insert(4)
-	fmt.Println("param_1", param_1)
-	param_1 = obj.Insert(5)
-	fmt.Println("param_1", param_1)
-	// param_1 = obj.Insert(6)
-	// fmt.Println("param_1", param_1)
-	// param_1 = obj.Insert(7)
-	// fmt.Println("param_1", param_1)
-
-	param_2 := obj.Get_root()
-	fmt.Println(param_2)
-
 }
