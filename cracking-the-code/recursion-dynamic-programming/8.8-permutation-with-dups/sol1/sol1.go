@@ -3,43 +3,46 @@ package main
 import "fmt"
 
 func main() {
-	arr := getPerms("abcd")
-	for _, a := range arr {
-		fmt.Println(a)
-	}
+	arr := getPerms("abc")
+	// for _, a := range arr {
+	// 	fmt.Println(a)
+	// }
+	fmt.Println(arr)
 }
 
 func getPerms(str string) []string {
-	fmt.Println("here")
-	if str == "" {
-		fmt.Println("null")
-		return nil
-	}
 
-	permutations := []string{}
-	if len(str) == 0 { //base case
-		permutations = append(permutations, "")
+	if len(str) <= 1 { //base case
+		fmt.Println("str", str)
+		permutations := []string{}
+		permutations = append(permutations, str)
 		return permutations
 	}
 
-	first := str[0] //get first char
-	fmt.Println("first", string(first))
-	remainder := str[1:]
-	fmt.Println("remainder", remainder)
+	lastChar := str[len(str)-1] //get first char
+	allCharsExceptLast := str[:len(str)-1]
+	fmt.Println("lastChar", string(lastChar))
+	fmt.Println("allCharsExceptLast", allCharsExceptLast)
 
-	words := getPerms(remainder)
-	fmt.Println("words", words)
-	for _, word := range words {
-		for j := 0; j < len(word); j++ {
-			s := insertCharAt(word, first, j)
-			permutations = append(permutations, s)
+	permutationsOfAllCharsExceptLast := getPerms(allCharsExceptLast)
+	fmt.Println("LAST CHAR", string(lastChar))
+	fmt.Println("permutationsOfAllCharsExceptLast : ", permutationsOfAllCharsExceptLast)
+	var permutations2 []string
+	for _, word := range permutationsOfAllCharsExceptLast {
+		fmt.Println("word", word)
+		for j := 0; j <= len(word); j++ {
+			s := insertCharAt(word, lastChar, j)
+			fmt.Println("s", s)
+			permutations2 = append(permutations2, s)
 		}
 	}
-	return permutations
+	fmt.Println("FINAL:", permutations2)
+	return permutations2
 }
 
-func insertCharAt(word string, c byte, i int) string {
+func insertCharAt(word string, char byte, i int) string {
 	start := word[0:i]
 	end := word[i:]
-	return start + string(c) + end
+	fmt.Println("start + string(char) + end", start+string(char)+end)
+	return start + string(char) + end
 }
