@@ -24,8 +24,8 @@ func (l *List) nthToLast(k int) *Node {
 	pointer2 := l.head
 
 	/*move p1 to k nodes into the list*/
-	for i := 0; i < k; i++ {
-		if pointer1 == nil {
+	for i := 0; i < k-1; i++ {
+		if pointer1.next == nil {
 			return nil
 		}
 		pointer1 = pointer1.next
@@ -38,8 +38,8 @@ func (l *List) nthToLast(k int) *Node {
 		pointer2 = pointer2.next
 	}
 
-	fmt.Println(pointer1.item)
-	return pointer1
+	fmt.Println(pointer2.item)
+	return pointer2
 }
 
 /* HELPER CODE -- NOT USED FOR GRADING */
