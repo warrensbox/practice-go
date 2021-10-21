@@ -16,7 +16,7 @@ func main() {
 	fmt.Println(myFunction("test input"))
 }
 
-func (list *ListNode) Reverse() *List {
+func (l *LinkedList) Reverse() *List {
 
 	current := l.Head
 	prev := &List{}
@@ -37,4 +37,48 @@ func (list *ListNode) Reverse() *List {
 
 	return prev
 
+}
+
+type LinkedList struct {
+	Head *List
+}
+type List struct {
+	Val  int
+	Next *List
+}
+
+func New() *LinkedList {
+	var newList LinkedList
+	return &newList
+}
+
+func (list *LinkedList) Add(item int) {
+
+	newItem := &List{
+		Val: item,
+	}
+
+	if list.Head == nil {
+		list.Head = newItem //if head is nil, set head to new item
+	} else {
+		currentNode := list.Head
+		for currentNode.Next != nil {
+			currentNode = currentNode.Next
+		}
+		currentNode.Next = newItem
+	}
+
+}
+
+func (list *LinkedList) ShowAll() {
+
+	if list.Head == nil {
+		fmt.Println("Nothing in list")
+	} else {
+		currentNode := list.Head
+		for currentNode != nil {
+			fmt.Println(currentNode.Val)
+			currentNode = currentNode.Next
+		}
+	}
 }
