@@ -15,7 +15,7 @@ func countingSort(theArr []int, maxVal int) []int {
 	// counts[0] stores the number of 0's in the input
 	// counts[4] stores the number of 4's in the input
 	// etc.
-	counts := make([]int, len(theArr)+1)
+	counts := make([]int, maxVal+1)
 
 	for _, item := range theArr {
 		counts[item] += 1
