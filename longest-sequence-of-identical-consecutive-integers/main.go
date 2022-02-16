@@ -4,7 +4,8 @@ import "fmt"
 
 func main() {
 
-	arr := []int{1, 1, 1, 1, 2, 2, 2, 7, 7, 7, 7, 7, 7, 3, 3, 2, 2, 2, 2}
+	//arr := []int{1, 1, 1, 1, 2, 2, 2, 7, 7, 7, 7, 7, 7, 3, 3, 2, 2, 2, 2}
+	arr := []int{1, 1, 1}
 	fmt.Println(longestSubsVal(arr))
 
 }
@@ -60,7 +61,7 @@ func longestSubsVal(arr []int) int {
 	max := 1
 	hashMap := make(map[int]int)
 
-	for secondPointer < len(arr)-1 {
+	for secondPointer < len(arr) {
 
 		if arr[currPointer] == arr[secondPointer] {
 			secondPointer++
@@ -72,6 +73,11 @@ func longestSubsVal(arr []int) int {
 			currPointer = secondPointer
 		}
 	}
+
+	length := secondPointer - currPointer
+	hashMap[length] = arr[currPointer]
+	max = Max(max, length)
+
 	return hashMap[max]
 }
 func Max(a, b int) int {

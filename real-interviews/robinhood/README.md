@@ -14,7 +14,8 @@ Output: A list of all services depended by (and including) entrypoint as an arra
 Example
 
 
-# Input:
+Input:
+
 service_list = ["logging=", 
  "user=logging", 
  "orders=user,foobar", 
@@ -22,7 +23,8 @@ service_list = ["logging=",
  "dashboard=user,orders,recommendations"]
 entrypoint = "dashboard"
 
-# Output (note sorted by service name)
+Output (note sorted by service name):
+
 ["dashboard*1", 
  "logging*4", 
  "orders*2", 

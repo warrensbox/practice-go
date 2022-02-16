@@ -16,20 +16,10 @@ func main() {
 	entrypoint := "dashboard"
 
 	fmt.Println(solution(service_list, entrypoint))
-
-	//    # Output (note sorted by service name)
-	//    ["dashboard*1",
-	// 	"logging*4",
-	// 	"orders*2",
-	// 	"recommendations*1",
-	// 	"user*4"]
-
 }
 
 func solution(service_list []string, entrypoint string) []string {
 
-	//graph
-	//graph := make(map[Node][]Node)
 	graph := make(map[string][]string)
 	for _, val := range service_list {
 
@@ -48,18 +38,12 @@ func solution(service_list []string, entrypoint string) []string {
 	mapSum := make(map[string]int)
 
 	for len(queue) > 0 {
-		size := len(queue)
-		for i := 0; i < size; i++ {
-			node := (queue)[0]
-			(queue) = (queue)[1:]
-			child, _ := graph[node]
-			mapSum[node]++
-			for _, val := range child {
-				queue = append(queue, val)
-			}
-
+		node := (queue)[0]
+		(queue) = (queue)[1:]
+		mapSum[node]++
+		for _, val := range graph[node] {
+			queue = append(queue, val)
 		}
-
 	}
 
 	res := []string{}
