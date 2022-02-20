@@ -1,8 +1,6 @@
 package main
 
-func main() {
-
-}
+import "fmt"
 
 func isValidSudoku(board [][]byte) bool {
 
@@ -42,11 +40,20 @@ func check3by3(board [][]byte) bool { //O(n^2)
 			mem := make(map[byte]bool)
 			for r := row; r < row+3; r++ { // O(3)
 				for c := col; c < col+3; c++ { // O(3)
+					if string(board[r][c]) == "." {
+						continue
+					}
+					fmt.Println("mem[board[r][c]]", mem[board[r][c]])
+					fmt.Println("number", string(board[r][c]))
 					if mem[board[r][c]] {
+						fmt.Println("hsere")
 						return false
 					} else {
 						mem[board[r][c]] = true
 					}
+
+					fmt.Println("mem[board[r][c]]", mem[board[r][c]])
+					fmt.Println("number", string(board[r][c]))
 				}
 			}
 		}
@@ -59,7 +66,13 @@ func checkVertical(board [][]byte) bool { //O(n^2)
 	for col := 0; col < len(board[0]); col++ {
 		mem := make(map[byte]bool)
 		for row := 0; row < len(board); row++ {
+
+			if board[row][col] == '.' {
+				continue
+			}
+
 			if mem[board[row][col]] {
+				fmt.Println("ahere")
 				return false
 			} else {
 				mem[board[row][col]] = true
@@ -76,7 +89,12 @@ func checkHorizontal(board [][]byte) bool {
 	for row := 0; row < len(board); row++ {
 		mem := make(map[byte]bool)
 		for col := 0; col < len(board[0]); col++ {
+
+			if board[row][col] == '.' {
+				continue
+			}
 			if mem[board[row][col]] {
+				fmt.Println("here")
 				return false
 			} else {
 				mem[board[row][col]] = true
