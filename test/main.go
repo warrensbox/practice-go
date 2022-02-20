@@ -1,44 +1,44 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
 
+	//words := []string{"a", "b", "ab", "ac", "abc", "abd"}
+	//words := []string{"a", "b", "ac", "ap", "ba", "app", "ban", "appl", "bana", "apple", "apply", "banan"}
+	//words := []string{"a", "b", "ba", "bca", "bda", "bdca"}
+	words := []string{"a", "b"}
+	fmt.Println(longesr(words))
+
 }
 
-func countPaths(n int, roads [][]int) int {
+func longesr(words []string) string {
 
-	graph := make(map[Node][]Node)
-	//graph := make(map[int][]Node)
+	// sort.Slice(words, func(i, j int) bool {
+	// 	return len(words[i]) < len(words[j])
+	// })
 
-	for _, point := range roads {
-		var node Node
-		node.Val = point[1]
-		node.Dist = point[2]
-		graph[Node{Val: point[0]}] = append(graph[Node{Val: point[0]}], node)
-		// graph[point[0]] = append(graph[point[0]],node)
-	}
-	fmt.Println(graph)
+	sort.Strings(words)
+	fmt.Println("word", words)
+	hash := make(map[string]bool)
 
-	var queue []Node
+	res := ""
+	for _, word := range words {
 
-	queue = append(queue, Node{Val: 0})
+		prefix := word[:len(word)-1]
 
-	for len(queue) > 0 {
-
-		node := queue[0]
-		queue = queue[1:]
-
-		for _, val := range graph[node.Val] {
-			queue = append(queue, val)
+		if (len(word) == 1) || hash[prefix] {
+			if len(word) > len(res) {
+				res = word
+			}
+			hash[word] = true
 		}
+
+		fmt.Println(hash)
 	}
 
-	return -1
-
-}
-
-type Node struct {
-	Val  int
-	Dist int
+	return res
 }
