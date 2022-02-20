@@ -5,13 +5,6 @@ import (
 	"strings"
 )
 
-/*
-goal : construct a tree from a array of file list
-solution :
-1) construct a graph ds
-2) use bfs to draw tree
-*/
-
 func main() {
 
 	files := []string{
@@ -20,68 +13,39 @@ func main() {
 		"webpage/assets/js/c.js",
 		"webpage/index.html",
 	}
-
-	constructTree(files)
-
+	constructTree2(files)
 }
 
-func constructTree(dir []string) {
+func constructTree2(dir []string) {
 
-	graph := make(map[Node][]Node)
+	graph := make(map[string][]string)
 
 	for i := 0; i < len(dir); i++ {
 		arr := strings.Split(dir[i], "/")
-		graph[Node{"", 0}] = append(graph[Node{"", 0}], Node{arr[0], 1})
 		if len(arr) > 0 {
 			for j := 1; j < len(arr); j++ {
 				parent := arr[j-1]
 				child := arr[j]
-				graph[Node{parent, j}] = append(graph[Node{parent, j}], Node{child, j + 1})
+				graph[parent] = append(graph[parent], child)
 			}
 		}
 
 	}
 
-	var stack []Node
-	stack = append(stack, Node{"", 0})
-	seen := make(map[Node]bool)
+	var dfs func(node string, indent int)
+	seen := make(map[string]bool)
+	dfs = func(node string, indent int) {
 
-	for len(stack) > 0 {
-		size := len(stack)
-		top := stack[len(stack)-1]
-		stack = stack[:len(stack)-1]
-
-		if seen[top] {
-			continue
+		if seen[node] == true {
+			return
 		}
-
-		seen[top] = true
-
-		Printer(top)
-
-		for i := 0; i < size; i++ {
-
-			for _, val := range graph[top] {
-				if !seen[val] {
-					stack = append(stack, val)
-				}
-			}
+		ind := strings.Repeat("-", indent)
+		fmt.Println(ind + node)
+		seen[node] = true
+		for _, val := range graph[node] {
+			dfs(val, indent+1)
 		}
 
 	}
-}
-
-func Printer(node Node) {
-
-	if node.value == "" {
-		return
-	}
-	indent := strings.Repeat(" ", node.indent)
-	value := indent + "--" + node.value
-	fmt.Println(value)
-}
-
-type Node struct {
-	value  string
-	indent int
+	dfs("webpage", 0)
 }
