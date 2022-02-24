@@ -2,14 +2,6 @@ package main
 
 import "fmt"
 
-/*
-
- Design a time-based key-value data structure that can store multiple values for
- the same key at different timestamps and retrieve the key's value at a certain
- timestamp.
-
-*/
-
 func main() {
 
 	keyval := New()
@@ -62,25 +54,25 @@ func (t *TimeMap) Get(key string, timestamp int) string {
 	if !ok {
 		return res
 	}
-	//properties {1,barr} {4, fighter} {5, apple}
+	if timestamp < properties[0].time { //if the the timestamp is smaller then biggest timestap in our record - return empty
+		return res
+	}
 
-	if len(properties) == 1 {
+	if len(properties) == 1 { //if there is only one
 		return properties[0].val
 	}
 
 	left := 0
 	right := len(properties) - 1
 	target := timestamp
-	for left < right {
-
+	for left <= right {
 		mid := (left + right) / 2
-
 		if target < properties[mid].time {
-			left = mid + 1
-		} else {
 			right = mid - 1
+		} else {
+			left = mid + 1
 		}
 	}
 
-	return properties[left].val
+	return properties[right].val
 }

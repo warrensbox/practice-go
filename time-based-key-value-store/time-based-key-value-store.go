@@ -1,5 +1,20 @@
 package main
 
+import "fmt"
+
+func main() {
+
+	keyval := Constructor()
+	keyval.Set("foo", "bar", 1)
+	fmt.Println(keyval.Get("foo", 1))
+	keyval.Set("cat", "dog", 2)
+	keyval.Set("day", "night", 3)
+	fmt.Println(keyval.Get("day", 4))
+	keyval.Set("foo", "fighters", 4)
+	keyval.Set("foo", "apple", 6)
+	fmt.Println(keyval.Get("foo", 5))
+}
+
 type TimeMap struct {
 	TimeValues map[string][]ValueStamp
 }
