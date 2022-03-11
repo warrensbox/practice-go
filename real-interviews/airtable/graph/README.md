@@ -14,7 +14,7 @@ onBuild("A")
 Should return D,E,F - to build A, you must first start with D,E and F
 
 ## Part 2:
-Given a file, what is the next file that can be build.
+Given a starting file (D, E, F), what is the next file that can be build.
 ### Case 1
 nextBuild("D")
 Should return [] //because you have can't build anything else
