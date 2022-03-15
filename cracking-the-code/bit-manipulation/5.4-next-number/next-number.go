@@ -35,8 +35,11 @@ func getNext(n uint32) uint32 {
 
 	//clear all bits to the right of p
 	a := uint32(1 << p)
+	fmt.Printf("a %b\n", a)
 	b := a - 1
+	fmt.Printf("b %b\n", b)
 	mask := ^b
+	fmt.Printf("mask %b\n", mask)
 	n = n & mask
 
 	fmt.Printf("%b\n", n)

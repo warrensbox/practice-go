@@ -15,7 +15,7 @@ func (s *Stack) Sort() *Stack {
 	for len(s.stk) != 0 {
 		tmp := s.Pop()
 		fmt.Println("tmp", tmp)                 //step 1
-		for len(r.stk) != 0 && r.Peek() > tmp { //step 2
+		for len(r.stk) != 0 && r.Peek() < tmp { //step 2 //smallest on top of stack
 			s.Push(r.Pop())
 			fmt.Println("exchange")
 			fmt.Println(s.stk)

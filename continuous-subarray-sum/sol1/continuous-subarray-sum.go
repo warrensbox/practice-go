@@ -6,8 +6,8 @@ import (
 
 func main() {
 
-	input := []int{23, 2, 4, 6, 7}
-	k := 7
+	input := []int{23, 2, 4, 6, 2}
+	k := 6
 	output := checkSubarraySum(input, k)
 
 	fmt.Println(output)
@@ -21,9 +21,9 @@ func checkSubarraySum(nums []int, k int) bool {
 
 	for i := 1; i < len(nums); i++ {
 		sum[i] = sum[i-1] + nums[i]
-		fmt.Println(sum[i])
+		fmt.Print(sum[i])
 	}
-
+	fmt.Println()
 	for start := 0; start < len(nums)-1; start++ {
 		fmt.Println("start", start)
 		for end := start + 1; end < len(nums); end++ {

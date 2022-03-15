@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"strings"
 	"strconv"
+	"strings"
 )
 
-func main(){
+func main() {
 
 	input := 5
 	output := countAndSay(input)
@@ -27,35 +27,27 @@ func countAndSay(n int) string {
 	temp := sequence1
 	var j int
 	// i starts from 2 because we know the first sequnce already
-	for i:=2;i<=n;i++{
-		fmt.Println("------outside-------")
-		fmt.Println("i", i)
-		fmt.Println("len(temp)", len(temp))
-		for j=0;j<len(temp);j++{
-			fmt.Println("#####inner######")
-			fmt.Println("j", j)
-			count := 1
-			fmt.Println("count", count)
-			tempStr := temp[j]
-			fmt.Println("tempStr", string(tempStr))
+	for i := 2; i <= n; i++ {
 
-			for j < len(temp)-1 && temp[j]==temp[j+1]{
-				fmt.Println("-----inner-inner--------")
+		for j = 0; j < len(temp); j++ {
+
+			count := 1
+
+			tempStr := temp[j]
+
+			for j < len(temp)-1 && temp[j] == temp[j+1] {
+
 				count++
 				j++
-				fmt.Println("count", count)
-				fmt.Println("j", j)
-				fmt.Println("-----inner-inner--------")
 			}
-			
-			result.WriteString(strconv.Itoa(count)+string(tempStr))
-			fmt.Println("result", strconv.Itoa(count)+string(tempStr))
-			fmt.Println("#####inner######")
+
+			result.WriteString(strconv.Itoa(count) + string(tempStr))
+
 		}
-		temp =  result.String()
-		fmt.Println("temp", temp)
+		temp = result.String()
+
 		result.Reset()
-		fmt.Println("------outside-------")
+
 	}
 	return temp
 }

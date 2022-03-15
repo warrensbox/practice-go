@@ -1,0 +1,2 @@
+Given a data set of 4 letter words, find the most popular letter for each position.  Input for this problem is N lines, each line containing a 4 letter word.  1 <N< 10,000.   
+Output for this problem is a single 4 character string followed by a newline.  Please read from stdin and write to stdout.
