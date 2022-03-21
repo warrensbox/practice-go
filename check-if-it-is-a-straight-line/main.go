@@ -2,10 +2,6 @@ package main
 
 func checkStraightLine(coordinates [][]int) bool {
 
-	//     sort.Slice(coordinates, func(a, b int) bool{
-	//         return coordinates[a][0] < coordinates[b][0]
-	//     })
-
 	if len(coordinates) <= 2 {
 		return true
 	}

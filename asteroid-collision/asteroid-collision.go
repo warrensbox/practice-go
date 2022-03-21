@@ -9,7 +9,9 @@ func main() {
 	// S := "a##c"
 	// T := "#a#c"
 
-	S := []int{10, 2, -5}
+	//S := []int{10, 2, -5}
+
+	S := []int{-5, 5, -3, -12}
 
 	output := asteroidCollision(S)
 	fmt.Println(output)

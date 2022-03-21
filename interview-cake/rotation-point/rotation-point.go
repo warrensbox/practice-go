@@ -7,6 +7,7 @@ import "fmt"
 func main() {
 
 	arr := []int{5, 6, 7, 8, 9, 10, 11, 1, 2, 3, 4}
+	//			 0  1  2  3  4   5   6  7  8  9  10
 	fmt.Println(findRotationPoint(arr))
 }
 
