@@ -1,33 +1,53 @@
 package main
 
+func main() {
+
+}
 func exist(board [][]byte, word string) bool {
 
 	exist := false
 
-	var backtrack func(r, c int, curr string)
-	backtrack = func(r, c int, curr string) {
+	var backtrack func(r, c int, wordBack string) bool
 
+	backtrack = func(r, c int, wordBack string) bool {
 		if r < 0 || c < 0 || r >= len(board) || c >= len(board[0]) || board[r][c] == '1' {
-			if curr == word {
-				exist = true
-			}
-			return
+			return false
+		}
+
+		if board[r][c] != wordBack[0] {
+			return false
+		}
+
+		if len(wordBack) == 1 {
+			return true
 		}
 
 		tmp := board[r][c]
 		board[r][c] = '1'
-		curr += string(tmp)
-		backtrack(r+1, c, curr)
-		backtrack(r-1, c, curr)
-		backtrack(r, c+1, curr)
-		backtrack(r, c-1, curr)
+
+		if backtrack(r+1, c, wordBack[1:]) {
+			return true
+		}
+		if backtrack(r-1, c, wordBack[1:]) {
+			return true
+		}
+		if backtrack(r, c+1, wordBack[1:]) {
+			return true
+		}
+		if backtrack(r, c-1, wordBack[1:]) {
+			return true
+		}
 
 		board[r][c] = tmp
+
+		return false
 	}
 
 	for r := 0; r < len(board); r++ {
-		for c := 0; c < len(board)[0]; c++ {
-			backtrack(r, c, "")
+		for c := 0; c < len(board[0]); c++ {
+			if backtrack(r, c, word) {
+				return true
+			}
 		}
 	}
 
