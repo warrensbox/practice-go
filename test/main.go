@@ -2,80 +2,44 @@ package main
 
 import (
 	"fmt"
+	"math"
+	"strings"
 )
-
-/* HELPER FUNCTION */
-type Iterator interface {
-	// Returns the next item or nil if there are no more items
-	Next() interface{}
-}
-
-type IntIterator struct {
-	data []int
-}
-
-func NewIntIter(data []int) Iterator {
-	return &IntIterator{data: data}
-}
-
-func (n *IntIterator) Next() interface{} {
-	if len(n.data) > 0 {
-		front := n.data[0] // peek queue, get front
-		n.data = n.data[1:]
-		return front
-	}
-	return nil
-}
-
-/* END HELPER FUNCTION */
 
 func main() {
 
-	n := NewIntIter([]int{1, 2, 3})
-
-	p := New(n)
-
-	fmt.Println(p.Next()) //1
-	fmt.Println(p.Peek()) //2
-	fmt.Println(p.Peek()) //2
-	fmt.Println(p.Next()) //2
-	fmt.Println(p.Peek()) //3
-	fmt.Println(p.Next()) //3
-	fmt.Println(p.Next()) //nil
+	fmt.Println(generate("cofe applo "))
 }
 
-type PeekIterator interface {
-	// Peeks at the next value in the iterator without consuming it.
-	Peek() interface{}
-	Iterator
-}
+func generate(str string) int {
 
-func New(iter Iterator) PeekIterator {
-	return &MyPeekIterator{
-		iter:   iter,
-		cached: false,
-		curr:   0,
+	str = strings.Replace(str, " ", "", -1)
+	pattern := "facebook"
+	pattenChar := make([]int, 26)
+	for _, val := range pattern {
+		pattenChar[val-'a']++
 	}
-}
 
-type MyPeekIterator struct {
-	iter   Iterator
-	cached bool
-	curr   interface{}
-}
-
-func (m *MyPeekIterator) Next() interface{} {
-	if m.cached {
-		m.cached = false
-		return m.curr
+	textChar := make([]int, 26)
+	for _, val := range str {
+		textChar[val-'a']++
 	}
-	return m.iter.Next()
+	max := math.MinInt32
+	for _, val := range str {
+		if pattenChar[val-'a'] > 0 {
+			num := textChar[val-'a'] / pattenChar[val-'a']
+			max = Max(max, num)
+		}
+	}
+
+	return max
 }
 
-func (m *MyPeekIterator) Peek() interface{} {
-	if !m.cached {
-		m.cached = true
-		m.curr = m.iter.Next()
+func Max(x, y int) int {
+
+	if x > y {
+		return x
 	}
-	return m.curr
+
+	return y
 }
