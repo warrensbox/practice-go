@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 type ListNode struct {
 	Val  int
 	Next *ListNode
@@ -10,7 +8,7 @@ type List struct {
 	start *ListNode
 }
 
-func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+func addTwoNumberss(l1 *ListNode, l2 *ListNode) *ListNode {
 	carry := 0
 	dummy := &ListNode{}
 	curr := dummy
@@ -28,8 +26,6 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		}
 
 		carry = sum / 10
-		fmt.Println("sum", sum)
-		fmt.Println("carry", carry)
 		curr.Next = &ListNode{Val: sum % 10}
 
 		curr = curr.Next
@@ -41,3 +37,35 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 
 	return dummy.Next
 }
+
+func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+	carry := 0
+	var res *ListNode
+	for l1 != nil || l2 != nil {
+
+		sum := carry
+		if l1 != nil {
+			sum += l1.Val
+			l1 = l1.Next
+		}
+
+		if l2 != nil {
+			sum += l2.Val
+			l2 = l2.Next
+		}
+
+		carry = sum / 10
+		res.Val = sum % 10
+		res = res.Next
+	}
+
+	return res
+}
+
+/*
+
+absolute hire
+
+no hire but you can convince me
+
+*/

@@ -2,44 +2,58 @@ package main
 
 import (
 	"fmt"
-	"math"
+	"strconv"
 	"strings"
 )
 
-func main() {
+/*
+* The exercise is to write the function `countAndSay` which is a sequence of
+* digit strings defined by the following recursive formula:
+*
+* countAndSay(1): "1" // this is the base case
+* countAndSay(n): is the way you would say the string returned by countAndSay(n-1)
+*
+* For example, if we want to know the string returned by `countAndSay(4)`:
+*
+* countAndSay(1) = "1"
+* countAndSay(2) = "11"
+* countAndSay(3) = "21"
+* countAndSay(4) = "1211"
+ */
 
-	fmt.Println(generate("cofe applo "))
+func main() {
+	fmt.Println(countAndSay(3))
 }
 
-func generate(str string) int {
+func countAndSay(n int) string {
+	// Solution goes here...
+	str := strCounter("1", n)
 
-	str = strings.Replace(str, " ", "", -1)
-	pattern := "facebook"
-	pattenChar := make([]int, 26)
-	for _, val := range pattern {
-		pattenChar[val-'a']++
+	return str
+}
+
+func strCounter(str string, n int) string {
+	// n = 2, str = "1"
+	// n = 1, str = ""
+	if n == 1 {
+		return str
 	}
 
-	textChar := make([]int, 26)
-	for _, val := range str {
-		textChar[val-'a']++
-	}
-	max := math.MinInt32
-	for _, val := range str {
-		if pattenChar[val-'a'] > 0 {
-			num := textChar[val-'a'] / pattenChar[val-'a']
-			max = Max(max, num)
+	charPointer := 0
+	countPointer := 0
+	count := 0
+	var sb strings.Builder
+	for countPointer < len(str) {
+		if str[charPointer] == str[countPointer] {
+			countPointer++
+		} else {
+			count = countPointer - charPointer
+			sb.WriteString(strconv.Itoa(count) + string(str[charPointer]))
+			charPointer = countPointer
 		}
 	}
 
-	return max
-}
-
-func Max(x, y int) int {
-
-	if x > y {
-		return x
-	}
-
-	return y
+	count = countPointer - charPointer
+	sb.WriteString(strconv.Itoa(count) + string(str[charPointer]))
+	return strCounter(sb.String(), n-1)
 }
