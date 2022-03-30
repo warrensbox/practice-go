@@ -2,80 +2,58 @@ package main
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
 )
 
-/* HELPER FUNCTION */
-type Iterator interface {
-	// Returns the next item or nil if there are no more items
-	Next() interface{}
-}
-
-type IntIterator struct {
-	data []int
-}
-
-func NewIntIter(data []int) Iterator {
-	return &IntIterator{data: data}
-}
-
-func (n *IntIterator) Next() interface{} {
-	if len(n.data) > 0 {
-		front := n.data[0] // peek queue, get front
-		n.data = n.data[1:]
-		return front
-	}
-	return nil
-}
-
-/* END HELPER FUNCTION */
+/*
+* The exercise is to write the function `countAndSay` which is a sequence of
+* digit strings defined by the following recursive formula:
+*
+* countAndSay(1): "1" // this is the base case
+* countAndSay(n): is the way you would say the string returned by countAndSay(n-1)
+*
+* For example, if we want to know the string returned by `countAndSay(4)`:
+*
+* countAndSay(1) = "1"
+* countAndSay(2) = "11"
+* countAndSay(3) = "21"
+* countAndSay(4) = "1211"
+ */
 
 func main() {
-
-	n := NewIntIter([]int{1, 2, 3})
-
-	p := New(n)
-
-	fmt.Println(p.Next()) //1
-	fmt.Println(p.Peek()) //2
-	fmt.Println(p.Peek()) //2
-	fmt.Println(p.Next()) //2
-	fmt.Println(p.Peek()) //3
-	fmt.Println(p.Next()) //3
-	fmt.Println(p.Next()) //nil
+	fmt.Println(countAndSay(3))
 }
 
-type PeekIterator interface {
-	// Peeks at the next value in the iterator without consuming it.
-	Peek() interface{}
-	Iterator
+func countAndSay(n int) string {
+	// Solution goes here...
+	str := strCounter("1", n)
+
+	return str
 }
 
-func New(iter Iterator) PeekIterator {
-	return &MyPeekIterator{
-		iter:   iter,
-		cached: false,
-		curr:   0,
+func strCounter(str string, n int) string {
+	// n = 2, str = "1"
+	// n = 1, str = ""
+	if n == 1 {
+		return str
 	}
-}
 
-type MyPeekIterator struct {
-	iter   Iterator
-	cached bool
-	curr   interface{}
-}
-
-func (m *MyPeekIterator) Next() interface{} {
-	if m.cached {
-		m.cached = false
-		return m.curr
+	charPointer := 0
+	countPointer := 0
+	count := 0
+	var sb strings.Builder
+	for countPointer < len(str) {
+		if str[charPointer] == str[countPointer] {
+			countPointer++
+		} else {
+			count = countPointer - charPointer
+			sb.WriteString(strconv.Itoa(count) + string(str[charPointer]))
+			charPointer = countPointer
+		}
 	}
-	return m.iter.Next()
-}
 
-func (m *MyPeekIterator) Peek() interface{} {
-	if !m.cached {
-		m.cached = true
-		m.curr = m.iter.Next()
-	}
-	return m.curr
+	count = countPointer - charPointer
+	sb.WriteString(strconv.Itoa(count) + string(str[charPointer]))
+	return strCounter(sb.String(), n-1)
 }

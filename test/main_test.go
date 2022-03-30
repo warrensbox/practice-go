@@ -1,6 +1,0 @@
-/*
-   Given a reference of a node in a connected undirected graph. Return a deep
-   copy of the graph.
-
-   A deep copy is a full clone of the all nodes to a new memory location.
-*/
